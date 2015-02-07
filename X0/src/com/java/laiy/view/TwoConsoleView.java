@@ -4,6 +4,10 @@ import com.java.laiy.controller.Game;
 
 public class TwoConsoleView extends ConsoleView {
 
+    private static final int ZERO_VALUE_FILTR_SWITCH = 0;
+
+    private static final int ONE_VALUE_FILTR_SWITCH = 1;
+
     public TwoConsoleView(final Game game) {
         super(game);
     }
@@ -20,19 +24,20 @@ public class TwoConsoleView extends ConsoleView {
         System.out.println(game.getPlayersName());
     }
 
-    //depending on the value displays characters before showPlayersName and after the showGamesName
-    private static void filtrValue (int a) {
+     //depending on the value displays characters before showPlayersName and after the showGamesName
+    private static void filtrValue (final int a) {
 
         switch (a) {
-            case 0:
+            case ZERO_VALUE_FILTR_SWITCH:
                 System.out.println("***");
                 break;
-            case 1:
+            case ONE_VALUE_FILTR_SWITCH:
                 System.out.println("$$$");
                 break;
             default:
                 System.out.println("incorrect value");
         }
     }
+
 
 }

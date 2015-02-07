@@ -21,4 +21,5 @@ public class Player {
     public String getFigure() {
         return figure;
     }
+
 }

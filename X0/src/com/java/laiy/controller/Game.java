@@ -5,12 +5,16 @@ import com.java.laiy.model.Player;
 
 public class Game {
 
-    private  static final String GAME_NAME = "X0";
+    private  final String gameName;
+
+    public Game(final String gameName) {
+        this.gameName = gameName;
+    }
 
     private Player[] players;
 
     public  String getGameName() {
-        return GAME_NAME;
+        return gameName;
     }
 
     public Player currentPlayer() {
@@ -24,4 +28,5 @@ public class Game {
     public Player[] getPlayersName() {
         return players;
     }
+
 }

@@ -7,7 +7,6 @@ public class ConsoleView {
 
     public final Game game;
 
-
     public ConsoleView(final Game game) {
         this.game = game;
     }
@@ -19,4 +18,5 @@ public class ConsoleView {
     public void showPlayersName() {
         System.out.println(game.getPlayersName());
     }
+
 }
