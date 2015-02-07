@@ -10,15 +10,29 @@ public class TwoConsoleView extends ConsoleView {
 
     @Override
     public void  showGameName() {
-        System.out.println("***");
+        filtrValue(0);
         System.out.println(game.getGameName());
     }
 
     @Override
     public void showPlayersName() {
-        System.out.println("$$$");
+        filtrValue(1);
         System.out.println(game.getPlayersName());
     }
 
+    //depending on the value displays characters before showPlayersName and after the showGamesName
+    private static void filtrValue (int a) {
+
+        switch (a) {
+            case 0:
+                System.out.println("***");
+                break;
+            case 1:
+                System.out.println("$$$");
+                break;
+            default:
+                System.out.println("incorrect value");
+        }
+    }
 
 }

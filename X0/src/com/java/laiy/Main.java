@@ -15,7 +15,8 @@ public class Main {
     }
 
     private static void startGame(final ConsoleView twoConsoleView) {
-        twoConsoleView.showPlayersName();
         twoConsoleView.showGameName();
+        twoConsoleView.showPlayersName();
     }
+
 }
