@@ -4,40 +4,31 @@ import com.java.laiy.controller.Game;
 
 public class TwoConsoleView extends ConsoleView {
 
-    private static final int ZERO_VALUE_FILTR_SWITCH = 0;
+    private static final char CHARACTER_HYPHEN = '-';
 
-    private static final int ONE_VALUE_FILTR_SWITCH = 1;
+    private static final byte LINE_SIZE = 20;
 
     public TwoConsoleView(final Game game) {
         super(game);
     }
 
     @Override
-    public void  showGameName() {
-        filtrValue(0);
-        System.out.println(game.getGameName());
+    public void showGameName() {
+        printLine(CHARACTER_HYPHEN, LINE_SIZE);
+        System.out.println("\n" + game.getGameName());
     }
 
     @Override
     public void showPlayersName() {
-        filtrValue(1);
-        System.out.println(game.getPlayersName());
+        printLine(CHARACTER_HYPHEN, LINE_SIZE);
+        System.out.println("\n" + game.getPlayersName());
     }
 
-     //depending on the value displays characters before showPlayersName and after the showGamesName
-    private static void filtrValue (final int a) {
+    public static void printLine(final Character lineCharacter, final int lineSize) {
+        for (int i = 0; i < lineSize; i++) {
+            System.out.print(lineCharacter);
 
-        switch (a) {
-            case ZERO_VALUE_FILTR_SWITCH:
-                System.out.println("***");
-                break;
-            case ONE_VALUE_FILTR_SWITCH:
-                System.out.println("$$$");
-                break;
-            default:
-                System.out.println("incorrect value");
         }
     }
-
 
 }
