@@ -19,4 +19,10 @@ public class ConsoleView {
         System.out.println(game.getPlayersName());
     }
 
+    public static void printLine(final Character lineCharacter, final int lineSize) {
+        for (int i = 0; i < lineSize; i++) {
+            System.out.print(lineCharacter);
+
+        }
+    }
 }

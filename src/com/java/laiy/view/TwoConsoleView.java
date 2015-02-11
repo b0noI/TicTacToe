@@ -24,11 +24,5 @@ public class TwoConsoleView extends ConsoleView {
         System.out.println("\n" + game.getPlayersName());
     }
 
-    public static void printLine(final Character lineCharacter, final int lineSize) {
-        for (int i = 0; i < lineSize; i++) {
-            System.out.print(lineCharacter);
-
-        }
-    }
 
 }

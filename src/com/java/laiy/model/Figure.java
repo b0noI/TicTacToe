@@ -1,8 +1,6 @@
 package com.java.laiy.model;
 
-/**
- * Created by Алексей on 11.02.2015.
- */
+
 public class Figure {
 
     private final String figure;
