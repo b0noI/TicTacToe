@@ -1,17 +1,22 @@
 package com.java.laiy.controller;
 
 
+import com.java.laiy.model.Board;
 import com.java.laiy.model.Player;
 
-public class Game {
+public class GameController {
 
     private  final String gameName;
 
-    public Game(final String gameName) {
+    private Player[] players;
+
+    private final Board board;
+
+    public GameController(final String gameName, final Board board) {
         this.gameName = gameName;
+        this.board = board;
     }
 
-    private Player[] players;
 
     public  String getGameName() {
         return gameName;

@@ -1,13 +1,13 @@
 package com.java.laiy.view;
 
 
-import com.java.laiy.controller.Game;
+import com.java.laiy.controller.GameController;
 
 public class ConsoleView {
 
-    public final Game game;
+    public final GameController game;
 
-    public ConsoleView(final Game game) {
+    public ConsoleView(final GameController game) {
         this.game = game;
     }
 

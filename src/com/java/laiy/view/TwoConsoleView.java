@@ -1,6 +1,6 @@
 package com.java.laiy.view;
 
-import com.java.laiy.controller.Game;
+import com.java.laiy.controller.GameController;
 
 public class TwoConsoleView extends ConsoleView {
 
@@ -8,7 +8,7 @@ public class TwoConsoleView extends ConsoleView {
 
     private static final byte LINE_SIZE = 20;
 
-    public TwoConsoleView(final Game game) {
+    public TwoConsoleView(final GameController game) {
         super(game);
     }
 
