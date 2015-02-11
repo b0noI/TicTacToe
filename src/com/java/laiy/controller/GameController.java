@@ -17,7 +17,6 @@ public class GameController {
         this.board = board;
     }
 
-
     public  String getGameName() {
         return gameName;
     }
