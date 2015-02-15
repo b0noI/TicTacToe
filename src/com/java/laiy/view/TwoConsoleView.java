@@ -6,7 +6,7 @@ public class TwoConsoleView extends ConsoleView {
 
     private static final char CHARACTER_HYPHEN = '-';
 
-    private static final byte LINE_SIZE = 20;
+    private static final int LINE_SIZE = 20;
 
     public TwoConsoleView(final GameController game) {
         super(game);
