@@ -1,6 +1,9 @@
 package com.java.laiy.view;
 
 import com.java.laiy.controller.GameController;
+import com.java.laiy.model.Board;
+
+import java.util.Scanner;
 
 public class TwoConsoleView extends ConsoleView {
 
@@ -10,6 +13,7 @@ public class TwoConsoleView extends ConsoleView {
 
     public TwoConsoleView(final GameController game) {
         super(game);
+
     }
 
     @Override
