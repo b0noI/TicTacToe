@@ -6,7 +6,7 @@ public class CoordinateHelper {
 
     private static final int MAX_COORDINATE = 3;
 
-    private static boolean checkCoordinate(final int coordinate) {
+    public static boolean checkCoordinate(final int coordinate) {
         if (coordinate < MIN_COORDINATE || coordinate > MAX_COORDINATE) {
             return false;
         }
