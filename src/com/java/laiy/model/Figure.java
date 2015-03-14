@@ -9,7 +9,7 @@ public class Figure {
         figure = figureName;
     }
 
-    public String getFigure(){
+    public String getFigureContent(){
         return figure;
     }
 }

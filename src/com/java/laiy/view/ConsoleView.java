@@ -22,7 +22,7 @@ public class ConsoleView {
 
     public void showPlayers() {
          for (Player player : game.getPlayers()) {
-             System.out.println(player.getName() + ": " + player.getFigure().getFigure() );
+             System.out.println(player.getName() + ": " + player.getFigure().getFigureContent() );
          }
     }
 
@@ -35,7 +35,7 @@ public class ConsoleView {
 
     public void showBoardLine(final int row) {
         for (int i = 0 ; i < BOARD_SIZE ; i++) {
-            System.out.print(game.getBoard().getFigure(row, i).getFigure());
+            System.out.print(game.getBoard().getFigure(row, i).getFigureContent());
         }
         System.out.println();
     }

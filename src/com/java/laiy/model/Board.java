@@ -17,7 +17,7 @@ public class Board {
     }
 
     public boolean setFigure(final int x, final int y, final Figure figure) {
-        if (!CoordinateHelper.checkCoordinate(x) || !CoordinateHelper.checkCoordinate(y) || figures[x][y].getFigure() != EMPTY_FIGURE)  {
+        if (!CoordinateHelper.checkCoordinate(x) || !CoordinateHelper.checkCoordinate(y) || figures[x][y].getFigureContent() != EMPTY_FIGURE)  {
             return false;
         }
         else {
