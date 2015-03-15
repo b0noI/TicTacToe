@@ -6,6 +6,8 @@ import com.java.laiy.helpers.CoordinateHelper;
 
 public class GameController {
 
+    private static final String GAME_NAME = "XO";
+
     private  final String gameName;
 
     private final Player[] players;
@@ -14,7 +16,7 @@ public class GameController {
 
     public GameController(final String gameName, final Player[] players, final Board board) {
         if (gameName == null || gameName.isEmpty()) {
-            this.gameName = "XO";
+            this.gameName = GAME_NAME;
         } else {
             this.gameName = gameName;
         }

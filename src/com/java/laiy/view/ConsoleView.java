@@ -7,7 +7,9 @@ import com.java.laiy.model.Player;
 public class ConsoleView {
 
     private static final int BOARD_SIZE = 3;
+
     private static final int LINE_SIZE = 3;
+
     private static final String CHARACTER_HYPHEN = "__";
 
     public final GameController game;
