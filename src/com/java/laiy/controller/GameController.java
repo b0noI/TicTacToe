@@ -107,16 +107,13 @@ public class GameController {
         int[] playersTurns = getPlayersTurns();
 
         if (playersTurns[FIRST_PLAYER] == playersTurns[SECOND_PLAYER]) {
-            System.out.println("++++" + players[firstPlayerNum].getFigure());
             return players[firstPlayerNum];
         }
         else {
             if ( firstPlayerNum  == FIRST_PLAYER ) {
-                System.out.println("++++" + players[SECOND_PLAYER].getFigure());
                     return players[SECOND_PLAYER];
                 }
                 else {
-                System.out.println("++++" + players[FIRST_PLAYER].getFigure());
                     return players[FIRST_PLAYER];
                 }
             }
