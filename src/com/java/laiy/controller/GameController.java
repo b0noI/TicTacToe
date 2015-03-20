@@ -17,6 +17,8 @@ public class GameController {
 
     private static final int DIAG_DOWN = 0;
 
+    private static final int DIAGS_FOR_CHECK = 2;
+
     private final String gameName;
 
     private final Player[] players;
@@ -34,9 +36,9 @@ public class GameController {
     }
 
     public Player getWinner() {
-        for ( int playerNum = 0 ; playerNum < players.length ; playerNum++) {
-            if ( checkLinesForWin(players[playerNum].getFigure().toString()) || checkRowsForWin(players[playerNum].getFigure().toString()) || checkDiagsForWin(players[playerNum].getFigure().toString()) ) {
-                return players[playerNum];
+        for ( Player playerForCheck : players) {
+            if ( checkLinesForWin(playerForCheck.getFigure().toString()) || checkRowsForWin(playerForCheck.getFigure().toString()) || checkDiagsForWin(playerForCheck.getFigure().toString()) ) {
+                return playerForCheck;
             }
         }
         return null;
@@ -61,7 +63,7 @@ public class GameController {
     }
 
     public boolean checkDiagsForWin(final String playerFigure) {
-        for (int diag_direction = 0 ; diag_direction < 2 ; diag_direction++) {
+        for (int diag_direction = 0 ; diag_direction < DIAGS_FOR_CHECK ; diag_direction++) {
             if ( getPlayerForDiag(diag_direction, playerFigure) == board.getFiguresArray().length) {
                 return true;
             }
