@@ -9,7 +9,8 @@ public class Figure {
         figure = figureName;
     }
 
-    public String getFigureContent(){
-        return figure;
+    @Override
+    public String toString() {
+        return this.figure;
     }
 }
