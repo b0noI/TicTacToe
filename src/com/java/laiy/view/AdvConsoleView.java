@@ -1,20 +1,18 @@
-package com.java.laiy.view;
+package io.hexlet.java.m101.xo.view;
 
-import com.java.laiy.controller.GameController;
+import io.hexlet.java.m101.xo.controller.GameController;
 
-public class AdvConsoleView extends  ConsoleView {
 
-    private static final char CHARACTER_HYPHEN = '*';
+public class AdvConsoleView extends ConsoleView {
 
-    private static final byte LINE_SIZE = 5;
-
-    public AdvConsoleView(final GameController game) {
-        super(game);
+    public AdvConsoleView(final GameController gameController) {
+       super(gameController);
     }
 
     @Override
     public void showGameName() {
-        printLine(CHARACTER_HYPHEN, LINE_SIZE);
-        System.out.println("\n" + game.getGameName());
+        System.out.println("***");
+        System.out.println(gameController.getGameName());
     }
+
 }

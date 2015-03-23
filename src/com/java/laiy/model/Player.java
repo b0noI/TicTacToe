@@ -1,8 +1,4 @@
-package com.java.laiy.model;
-
-
-import com.java.laiy.model.Player;
-import com.java.laiy.model.Figure;
+package io.hexlet.java.m101.xo.model;
 
 public class Player {
 
@@ -11,9 +7,15 @@ public class Player {
     private final Figure figure;
 
     public Player(final String name, final Figure figure) {
-        this.name = name;
-        this.figure = figure;
+
+      assert name != null;
+      assert figure != null;
+
+
+      this.name = name;
+      this.figure = figure;
     }
+
 
     public String getName() {
         return name;
@@ -24,3 +26,4 @@ public class Player {
     }
 
 }
+
