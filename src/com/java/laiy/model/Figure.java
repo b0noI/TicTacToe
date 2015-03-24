@@ -1,16 +1,15 @@
-package io.hexlet.java.m101.xo.model;
+package com.java.laiy.model;
 
 
 public class Figure {
 
     private final String figure;
 
-    public Figure(final String figure) {
-
-        assert figure != null;
-
-        this.figure = figure;
+    public Figure(final String figureName){
+        figure = figureName;
     }
 
-
+    public String getFigure(){
+        return figure;
+    }
 }
