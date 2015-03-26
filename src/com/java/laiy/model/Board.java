@@ -7,8 +7,6 @@ public class Board {
 
     private static final int BOARD_SIZE = 3;
 
-    private static final String EMPTY_FIGURE = "";
-
     private Figure[][] figures = new Figure[BOARD_SIZE][BOARD_SIZE];
 
     public Board(Figure[][] figures) {
@@ -17,10 +15,11 @@ public class Board {
     }
 
     public boolean setFigure(final int x, final int y, final Figure figure) {
-        if (!CoordinateHelper.checkCoordinate(x) || !CoordinateHelper.checkCoordinate(y) || figures[x][y].getFigureContent() != EMPTY_FIGURE)  {
+        if (!CoordinateHelper.checkCoordinate(x) || !CoordinateHelper.checkCoordinate(y) || figures[x][y] != null)  {
             return false;
         }
         else {
+            figures[x][y] = figure;
             return true;
         }
     }
@@ -32,6 +31,14 @@ public class Board {
         else {
             return figures[x][y];
         }
+    }
+
+    public Figure[][] getFiguresArray() {
+            return figures;
+    }
+
+    public int getRowLength(final int row) {
+        return figures[row].length;
     }
 
 }
