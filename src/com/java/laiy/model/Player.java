@@ -1,9 +1,5 @@
 package com.java.laiy.model;
 
-
-import com.java.laiy.model.Player;
-import com.java.laiy.model.Figure;
-
 public class Player {
 
     private final String name;

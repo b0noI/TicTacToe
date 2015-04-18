@@ -22,7 +22,7 @@ public class ConsoleView {
 
     private static final String INPUT_ERROR = "Coordinate is incorrect, please try again";
 
-    public final GameController game;
+    protected final GameController game;
 
     public ConsoleView(final GameController game) {
         assert game != null;
@@ -52,20 +52,20 @@ public class ConsoleView {
         }
     }
 
-    public void showBoardLine(final int row) {
+    protected static void printLine(final String lineCharacter, final int lineSize) {
+        for (int i = 0; i < lineSize; i++) {
+            System.out.print(lineCharacter);
+        }
+        System.out.println();
+    }
+
+    private void showBoardLine(final int row) {
         for (int i = 0; i < game.getBoard().getRowLength(row); i++) {
             if (game.getBoard().getFigure(row, i) == null) {
                 System.out.print(EMPTY_FIGURE);
             } else {
                 System.out.print(game.getBoard().getFigure(row, i).toString());
             }
-        }
-        System.out.println();
-    }
-
-    public static void printLine(final String lineCharacter, final int lineSize) {
-        for (int i = 0; i < lineSize; i++) {
-            System.out.print(lineCharacter);
         }
         System.out.println();
     }
