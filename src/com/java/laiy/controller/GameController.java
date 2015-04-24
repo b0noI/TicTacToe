@@ -1,7 +1,6 @@
 package com.java.laiy.controller;
 
 import com.java.laiy.model.Board;
-import com.java.laiy.model.Figure;
 import com.java.laiy.model.Player;
 import com.java.laiy.helpers.CoordinateHelper;
 
@@ -37,7 +36,9 @@ public class GameController {
 
     public Player getWinner() {
         for ( Player playerForCheck : players) {
-            if ( checkLinesForWin(playerForCheck.getFigure().toString()) || checkRowsForWin(playerForCheck.getFigure().toString()) || checkDiagsForWin(playerForCheck.getFigure().toString()) ) {
+            if ( checkLinesForWin(playerForCheck.getFigure().toString()) ||
+                 checkRowsForWin(playerForCheck.getFigure().toString()) ||
+                 checkDiagsForWin(playerForCheck.getFigure().toString())) {
                 return playerForCheck;
             }
         }
@@ -166,7 +167,7 @@ public class GameController {
         return board;
     }
 
-    public boolean move(final int x, final int y) {
+    public boolean check(final int x, final int y) {
 
         assert x >= 0;
         assert y >= 0;
