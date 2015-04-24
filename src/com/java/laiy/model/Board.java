@@ -1,6 +1,5 @@
 package com.java.laiy.model;
 
-import com.java.laiy.model.Figure;
 import com.java.laiy.helpers.CoordinateHelper;
 
 public class Board {
