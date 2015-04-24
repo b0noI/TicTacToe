@@ -1,16 +1,14 @@
 package com.java.laiy.model;
 
 
-public class Figure {
+public enum Figure {
+
+    X("X"), O("O");
 
     private final String figure;
 
-    public Figure(final String figureName){
-        figure = figureName;
-    }
-
-    @Override
-    public String toString() {
-        return this.figure;
+    private Figure(final String figure){
+        assert figure != null;
+        this.figure = figure;
     }
 }
