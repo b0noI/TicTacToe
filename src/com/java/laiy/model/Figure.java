@@ -7,12 +7,8 @@ public enum Figure {
 
     private final String figure;
 
-    Figure(final String figureName){
-        figure = figureName;
+    private Figure(final String figure){
+        assert figure != null;
+        this.figure = figure;
     }
-
-    public String getFigure() {
-        return figure;
-    }
-
 }
