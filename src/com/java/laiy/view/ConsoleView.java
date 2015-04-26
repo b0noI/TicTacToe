@@ -12,30 +12,40 @@ public class ConsoleView {
 
     private static final int LINE_SIZE = 3;
 
-    private static final String CHARACTER_HYPHEN = "_";
+    private static final String CHARACTER_HYPHEN = "-";
 
     private static final String EMPTY_FIGURE = " ";
 
-    private static final String DEFAULT_PLAYER_1 = "X";
+    private static final String COORDINATE_X = "X";
 
-    private static final String DEFAULT_PLAYER_2 = "O";
+    private static final String COORDINATE_Y = "Y";
 
     private static final String INPUT_ERROR = "Coordinate is incorrect, please try again";
 
-    protected final GameController game;
+    public final GameController game;
 
     public ConsoleView(final GameController game) {
         assert game != null;
         this.game = game;
     }
 
-    public void start() {
-        System.out.println("Your turn, input coordinates: ");
-        int x = getCoordinate(DEFAULT_PLAYER_1);
-        int y = getCoordinate(DEFAULT_PLAYER_2);
+    public int start(String coordinate, Player player) {
+        int x = 0;
+        switch(coordinate) {
+            case "X":
+                x = getCoordinate(COORDINATE_X, player);
+                break;
+            case "Y":
+                x = getCoordinate(COORDINATE_Y, player);
+                break;
+            default:
+                System.out.println();;
+                break;
+        }
+        return x;
     }
 
-    public  void showGameName() {
+    public void showGameName() {
         System.out.println(game.getGameName());
     }
 
@@ -52,14 +62,7 @@ public class ConsoleView {
         }
     }
 
-    protected static void printLine(final String lineCharacter, final int lineSize) {
-        for (int i = 0; i < lineSize; i++) {
-            System.out.print(lineCharacter);
-        }
-        System.out.println();
-    }
-
-    private void showBoardLine(final int row) {
+    public void showBoardLine(final int row) {
         for (int i = 0; i < game.getBoard().getRowLength(row); i++) {
             if (game.getBoard().getFigure(row, i) == null) {
                 System.out.print(EMPTY_FIGURE);
@@ -70,9 +73,17 @@ public class ConsoleView {
         System.out.println();
     }
 
-    private int getCoordinate(final String coordinateName) {
+    public static void printLine(final String lineCharacter, final int lineSize) {
+        for (int i = 0; i < lineSize; i++) {
+            System.out.print(lineCharacter);
+        }
+        System.out.println();
+    }
+
+    private int getCoordinate(final String coordinateName, final Player player) {
         while (true) {
-            System.out.print(String.format("Input the coordinate %s:", coordinateName));
+            System.out.print(player.getName() + ", ");
+            System.out.print(String.format("input the coordinate %s:", coordinateName));
             try {
                 final Scanner in = new Scanner(System.in);
                 int coordinate = in.nextInt() - 1;
