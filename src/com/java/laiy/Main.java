@@ -7,7 +7,7 @@ import com.java.laiy.model.Player;
 import com.java.laiy.view.ConsoleView;
 import com.java.laiy.view.MenuView;
 
-public class Mai {
+public class Main {
 
     public static void main(final String[] args) {
 
