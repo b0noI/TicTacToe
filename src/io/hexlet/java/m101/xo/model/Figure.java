@@ -1,11 +1,13 @@
 package io.hexlet.java.m101.xo.model;
 
 
-public class Figure {
+public enum  Figure {
+
+    X("X"),O("O");
 
     private final String figure;
 
-    public Figure(final String figure) {
+    Figure(final String figure) {
 
         assert figure != null;
 

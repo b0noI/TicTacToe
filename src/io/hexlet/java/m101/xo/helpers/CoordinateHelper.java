@@ -4,8 +4,8 @@ import io.hexlet.java.m101.xo.model.Board;
 
 public class CoordinateHelper {
 
-    private static final int MIN_COORDINATE = 0;
-    private static final int MAX_COORDINATE = Board.SIZE_FIELD;
+    public static final int MIN_COORDINATE = 0;
+    public static final int MAX_COORDINATE = Board.SIZE_FIELD-1;
 
 
     public static boolean coordinateHelper(int x, int y) {
@@ -16,7 +16,7 @@ public class CoordinateHelper {
         return true;
     }
 
-    private static Boolean checkCoordinate (int Coordinate){
+    public static Boolean checkCoordinate (int Coordinate){
         if (Coordinate < MIN_COORDINATE || Coordinate > MAX_COORDINATE){
             return false;
         }
