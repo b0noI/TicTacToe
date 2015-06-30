@@ -4,13 +4,21 @@ import com.java.laiy.helpers.CoordinateHelper;
 
 public class Board {
 
-    private static final int BOARD_SIZE = 3;
+    private static final int DEFAULT_BOARD_SIZE = 3;
 
-    private Figure[][] figures = new Figure[BOARD_SIZE][BOARD_SIZE];
+    private final Figure[][] figures;
 
-    public Board(Figure[][] figures) {
-        assert figures != null;
-        this.figures = figures;
+    public Board() {
+        this(DEFAULT_BOARD_SIZE);
+    }
+
+    public Board(final int customBoardSize) {
+        if (customBoardSize < DEFAULT_BOARD_SIZE) {
+            this.figures = new Figure[DEFAULT_BOARD_SIZE][DEFAULT_BOARD_SIZE];
+        }
+         else {
+            this.figures = new Figure[customBoardSize][customBoardSize];
+        }
     }
 
     public boolean setFigure(final int x, final int y, final Figure figure) {
