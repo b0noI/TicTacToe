@@ -36,7 +36,9 @@ public class GameController {
 
     public Player getWinner() {
         for ( Player playerForCheck : players) {
-            if ( checkLinesForWin(playerForCheck.getFigure().toString()) || checkRowsForWin(playerForCheck.getFigure().toString()) || checkDiagsForWin(playerForCheck.getFigure().toString()) ) {
+            if ( checkLinesForWin(playerForCheck.getFigure().toString()) ||
+                 checkRowsForWin(playerForCheck.getFigure().toString()) ||
+                 checkDiagsForWin(playerForCheck.getFigure().toString()) ) {
                 return playerForCheck;
             }
         }
