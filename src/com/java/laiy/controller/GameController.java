@@ -98,14 +98,14 @@ public class GameController {
         int playerDiagCount = 0;
         if ( direction == DIAG_UP ) {
             for (int i = 0; i < board.getFiguresArray().length ; i++) {
-                if ((board.getFigure(i, i) != null) && (board.getFigure(i, i).toString() == playerFigure)) {
+                if ((board.getFigure(i, i) != null) && (board.getFigure(i, i).toString().equals(playerFigure) )) {
                         playerDiagCount++;
                     }
             }
         }
         if ( direction == DIAG_DOWN ) {
             for (int i = 0; i < board.getFiguresArray().length ; i++) {
-                    if ((board.getFigure((board.getFiguresArray().length - 1) - i, i) != null) && (board.getFigure((board.getFiguresArray().length - 1) - i, i).toString() == playerFigure)) {
+                    if ((board.getFigure((board.getFiguresArray().length - 1) - i, i) != null) && (board.getFigure((board.getFiguresArray().length - 1) - i, i).toString().equals(playerFigure))) {
                         playerDiagCount++;
                     }
             }
@@ -116,7 +116,7 @@ public class GameController {
     private int getPlayerForColumn(final int column, final String playerFigure) {
         int playerColumnCount = 0;
         for (int i = 0; i < board.getFiguresArray().length ; i++) {
-                if ((board.getFigure(i, column) != null) && (board.getFigure(i, column).toString() == playerFigure)) {
+                if ((board.getFigure(i, column) != null) && (board.getFigure(i, column).toString().equals(playerFigure))) {
                     playerColumnCount++;
                 }
         }
@@ -159,7 +159,7 @@ public class GameController {
     private int getPlayerForLine(final int row, final String playerFigure) {
         int playerRowCount = 0;
         for (int i = 0; i < board.getRowLength(row) ; i++) {
-                if ((board.getFigure(row, i) != null) && (board.getFigure(row, i).toString() == playerFigure)) {
+                if ((board.getFigure(row, i) != null) && (board.getFigure(row, i).toString().equals(playerFigure))) {
                     playerRowCount++;
                 }
         }
