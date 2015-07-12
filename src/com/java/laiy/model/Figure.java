@@ -7,11 +7,12 @@ public enum Figure {
 
     private final String figure;
 
-    Figure(final String figureName){
+    private Figure(final String figureName){
         figure = figureName;
     }
 
-    public String getFigure() {
+    @Override
+    public String toString() {
         return figure;
     }
 
