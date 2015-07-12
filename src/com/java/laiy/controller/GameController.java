@@ -69,6 +69,23 @@ public class GameController {
         return true;
     }
 
+    public Player getCurrentPlayer(final Player firstPlayer) {
+        int firstPlayerNum = getFirstPlayerNum(firstPlayer);
+        int[] playersTurns = getPlayersTurns();
+
+        if (playersTurns[FIRST_PLAYER] == playersTurns[SECOND_PLAYER]) {
+            return players[firstPlayerNum];
+        }
+        else {
+            if ( firstPlayerNum  == FIRST_PLAYER ) {
+                return players[SECOND_PLAYER];
+            }
+            else {
+                return players[FIRST_PLAYER];
+            }
+        }
+    }
+
     private boolean checkLinesForWin(final String playerFigure) {
         for (int row = 0 ; row < board.getFiguresArray().length ; row++) {
             if ( getPlayerForLine(row, playerFigure) == board.getFiguresArray().length) {
@@ -124,23 +141,6 @@ public class GameController {
         }
         return playerColumnCount;
     }
-
-    private Player getCurrentPlayer(final Player firstPlayer) {
-        int firstPlayerNum = getFirstPlayerNum(firstPlayer);
-        int[] playersTurns = getPlayersTurns();
-
-        if (playersTurns[FIRST_PLAYER] == playersTurns[SECOND_PLAYER]) {
-            return players[firstPlayerNum];
-        }
-        else {
-            if ( firstPlayerNum  == FIRST_PLAYER ) {
-                    return players[SECOND_PLAYER];
-                }
-                else {
-                    return players[FIRST_PLAYER];
-                }
-            }
-        }
 
     private int[] getPlayersTurns() {
         int[] playersTurns = new int[players.length];
