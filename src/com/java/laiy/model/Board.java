@@ -1,6 +1,9 @@
 package com.java.laiy.model;
 
 import com.java.laiy.helpers.CoordinateHelper;
+import com.java.laiy.model.exceptions.EmptyFigureException;
+import com.java.laiy.model.exceptions.InvalidPointException;
+import com.java.laiy.model.exceptions.PointOccupiedException;
 
 public class Board {
 
@@ -21,19 +24,26 @@ public class Board {
         }
     }
 
-    public boolean setFigure(final int x, final int y, final Figure figure) {
-        if (!CoordinateHelper.checkCoordinate(x) || !CoordinateHelper.checkCoordinate(y) || figures[x][y] != null)  {
-            return false;
+    public void setFigure(final int x, final int y, final Figure figure) throws InvalidPointException,
+                                                                                PointOccupiedException,
+                                                                                EmptyFigureException {
+        if (!CoordinateHelper.checkCoordinates(x, y)) {
+            throw new InvalidPointException();
+        }
+        else if (figures[x][y] != null) {
+            throw new PointOccupiedException();
+        }
+        else if (figure == null){
+            throw new EmptyFigureException();
         }
         else {
             figures[x][y] = figure;
-            return true;
         }
     }
 
-    public Figure getFigure(final int x, final int y) {
-        if (!CoordinateHelper.checkCoordinate(x) || !CoordinateHelper.checkCoordinate(y)) {
-            return null;
+    public Figure getFigure(final int x, final int y) throws InvalidPointException{
+        if (!CoordinateHelper.checkCoordinates(x,y)) {
+            throw new InvalidPointException();
         }
         else {
             return figures[x][y];
