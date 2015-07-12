@@ -4,6 +4,7 @@ package com.java.laiy.view;
 import com.java.laiy.controller.GameController;
 import com.java.laiy.model.Player;
 import com.java.laiy.helpers.CoordinateHelper;
+import com.java.laiy.model.exceptions.InvalidPointException;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -45,7 +46,7 @@ public class ConsoleView {
          }
     }
 
-    public void showBoard() {
+    public void showBoard() throws InvalidPointException {
         for (int i = 0 ; i < game.getBoard().getFiguresArray().length; i++) {
             showBoardLine(i);
             printLine(CHARACTER_HYPHEN, LINE_SIZE);
@@ -59,7 +60,7 @@ public class ConsoleView {
         System.out.println();
     }
 
-    private void showBoardLine(final int row) {
+    private void showBoardLine(final int row) throws InvalidPointException {
         for (int i = 0; i < game.getBoard().getRowLength(row); i++) {
             if (game.getBoard().getFigure(row, i) == null) {
                 System.out.print(EMPTY_FIGURE);
