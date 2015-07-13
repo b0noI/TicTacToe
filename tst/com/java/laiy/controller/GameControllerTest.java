@@ -103,7 +103,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void testGetWinnerForColumns() throws Exception {
+    public void testGetWinnerForLines() throws Exception {
         final String gameName = "XO";
         final Player[] players = new Player[2];
         players[0] = new Player("Ox", Figure.X);
@@ -120,7 +120,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void testGetWinnerForLines() throws Exception {
+    public void testGetWinnerForColumns() throws Exception {
         final String gameName = "XO";
         final Player[] players = new Player[2];
         players[0] = new Player("Ox", Figure.X);
@@ -156,7 +156,7 @@ public class GameControllerTest {
         players[0] = new Player("Ox", Figure.X);
         players[1] = new Player("Xo", Figure.O);
         final GameController gameController = new GameController(gameName, players, board);
-        assertEquals(players, gameController.getPlayers());
+        assertArrayEquals(players, gameController.getPlayers());
     }
 
     @Test
@@ -174,28 +174,27 @@ public class GameControllerTest {
     @Test
     public void testMove() throws Exception {
         final String gameName = "XO";
-        final Figure testValue = Figure.O;
+        final Figure expectedValue = Figure.O;
         final Board board = new Board();
         final Player[] players = new Player[2];
         players[0] = new Player("Ox", Figure.X);
         players[1] = new Player("Xo", Figure.O);
         final GameController gameController = new GameController(gameName, players, board);
-        gameController.move(1,1,testValue);
-        assertEquals(testValue,gameController.getBoard().getFigure(1,1));
+        gameController.move(1,1,players[1]);
+        assertEquals(expectedValue,gameController.getBoard().getFigure(1,1));
     }
 
     @Test
     public void testIncorrectMove() throws Exception {
         final String gameName = "XO";
-        final Figure testValue = Figure.O;
         final Board board = new Board();
         final Player[] players = new Player[2];
         players[0] = new Player("Ox", Figure.X);
         players[1] = new Player("Xo", Figure.O);
         final GameController gameController = new GameController(gameName, players, board);
-        gameController.move(1,1,testValue);
+        gameController.move(1,1,players[1]);
         try {
-            gameController.move(1,1,testValue);
+            gameController.move(1,1,players[1]);
             fail();
         } catch (PointOccupiedException e) {}
     }
