@@ -90,7 +90,7 @@ public class BoardTest {
         board.setFigure(2,2,testValue);
         final Figure[][] actualFigures = board.getFiguresArray();
         final Figure[][] expectedFigures = new Figure[][]{{testValue,null,null},{null,testValue,null},{null,null,testValue}};
-        assertEquals(expectedFigures,actualFigures);
+        assertArrayEquals(expectedFigures,actualFigures);
 
     }
 
