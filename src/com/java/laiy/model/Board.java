@@ -6,6 +6,8 @@ import com.java.laiy.model.exceptions.PointOccupiedException;
 
 public class Board {
 
+    private static final int MIN_COORDINATE = 0;
+
     private static final int DEFAULT_BOARD_SIZE = 3;
 
     private final Figure[][] figures;
@@ -24,7 +26,7 @@ public class Board {
     }
 
     public void setFigure(final int x, final int y, final Figure figure) throws InvalidPointException {
-        if (!CoordinateHelper.checkCoordinates(x, y)) {
+        if (!checkCoordinates(x, y)) {
             throw new InvalidPointException();
         }
         else {
@@ -33,7 +35,7 @@ public class Board {
     }
 
     public Figure getFigure(final int x, final int y) throws InvalidPointException{
-        if (!CoordinateHelper.checkCoordinates(x,y)) {
+        if (!checkCoordinates(x, y)) {
             throw new InvalidPointException();
         }
         else {
@@ -47,6 +49,17 @@ public class Board {
 
     public int getRowLength(final int row) {
         return figures[row].length;
+    }
+
+    private boolean checkCoordinates(final int x, final int y){
+        return (checkCoordinate(x) && checkCoordinate(y));
+    }
+
+    private boolean checkCoordinate(final int coordinate) {
+        if (coordinate < MIN_COORDINATE || coordinate > figures.length - 1) {
+            return false;
+        }
+        return true;
     }
 
 }
