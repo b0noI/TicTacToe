@@ -66,17 +66,6 @@ public class BoardTest {
     }
 
     @Test
-    public void testOccupiedFigure() throws Exception {
-        final Figure testValue = Figure.O;
-        final Board board = new Board();
-        board.setFigure(1,1,testValue);
-        try {
-            board.setFigure(1,1,testValue);
-            fail();
-        } catch (final PointOccupiedException e) {}
-    }
-
-    @Test
     public void testGetFigure() throws Exception {
         final Board board = new Board();
         try {
@@ -87,7 +76,7 @@ public class BoardTest {
     }
 
     @Test
-    public void testGetFigureEmptyFigure() throws Exception {
+    public void testGetEmptyFigure() throws Exception {
         final Board board = new Board();
         assertNull(board.getFigure(1,1));
     }
