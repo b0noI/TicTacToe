@@ -1,9 +1,11 @@
 package com.java.laiy.controller;
 
 import com.java.laiy.model.Board;
+import com.java.laiy.model.Figure;
 import com.java.laiy.model.Player;
 import com.java.laiy.helpers.CoordinateHelper;
 import com.java.laiy.model.exceptions.InvalidPointException;
+import com.java.laiy.model.exceptions.PointOccupiedException;
 
 public class GameController {
 
@@ -60,16 +62,13 @@ public class GameController {
         return board;
     }
 
-    public boolean move(final int x, final int y) {
-
-        assert x >= 0;
-        assert y >= 0;
-
-        if (!CoordinateHelper.checkCoordinate(x) || !CoordinateHelper.checkCoordinate(y)) {
-            return false;
+    public void move(final int x, final int y, final Figure figure) throws InvalidPointException, PointOccupiedException {
+        if (board.getFigure(x,y) != null) {
+            throw new PointOccupiedException();
         }
-
-        return true;
+        else {
+            board.setFigure(x, y, figure);
+        }
     }
 
     public Player getCurrentPlayer(final Player firstPlayer) throws InvalidPointException {
