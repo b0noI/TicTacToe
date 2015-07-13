@@ -10,7 +10,7 @@ public class RulesController {
         this.gameController = gameController;
     }
 
-    public boolean setNextTurn(){
+    public boolean getNextTurn(){
         final Figure[][] figures =  gameController.getBoard().getFiguresArray();
         if (gameController.getWinner() != null){
             return false;
