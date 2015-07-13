@@ -36,7 +36,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void testGetWinnerNull() throws Exception {
+    public void testGetNoWinner() throws Exception {
         final String gameName = "XO";
         final Board board = new Board();
         final Player[] players = new Player[2];
@@ -57,33 +57,83 @@ public class GameControllerTest {
     }
 
     @Test
-    public void testGetWinnerForLines() throws Exception {
+    public void testGetWinnerNulls() throws Exception {
         final String gameName = "XO";
         final Board board = new Board();
         final Player[] players = new Player[2];
         players[0] = new Player("Ox", Figure.X);
         players[1] = new Player("Xo", Figure.O);
-        final GameController gameController = new GameController(gameName, players, board);
-        final Figure testValue = Figure.O;
-        board.setFigure(0,0,testValue);
-        board.setFigure(0,1,testValue);
-        board.setFigure(0,2,testValue);
-        assertEquals(players[1],gameController.getWinner());
+        final Figure testValueO = Figure.O;
+        final Figure testValueX = Figure.X;
+        final GameController gameControllerNulls = new GameController(gameName, players, board);
+        assertNull(gameControllerNulls.getWinner());
+
     }
 
     @Test
-    public void testGetWinnerForRows() throws Exception {
+    public void testGetWinnerForCustomBoard() throws Exception {
         final String gameName = "XO";
-        final Board board = new Board();
+        final Board board = new Board(7);
         final Player[] players = new Player[2];
         players[0] = new Player("Ox", Figure.X);
         players[1] = new Player("Xo", Figure.O);
+        final Figure testValueO = Figure.O;
+        final Figure testValueX = Figure.X;
         final GameController gameController = new GameController(gameName, players, board);
+        board.setFigure(0,0,testValueO);
+        board.setFigure(1,1,testValueX);
+        board.setFigure(2,2,testValueO);
+        board.setFigure(3,3,testValueX);
+        board.setFigure(4,4,testValueO);
+        board.setFigure(5,5,testValueX);
+        board.setFigure(6,6,testValueX);
+        assertNull(gameController.getWinner());
+
+        final Board boardWin = new Board(7);
+        final GameController gameControllerWin = new GameController(gameName, players, boardWin);
+        boardWin.setFigure(0,0,testValueO);
+        boardWin.setFigure(1,1,testValueO);
+        boardWin.setFigure(2,2,testValueO);
+        boardWin.setFigure(3,3,testValueO);
+        boardWin.setFigure(4,4,testValueO);
+        boardWin.setFigure(5,5,testValueO);
+        boardWin.setFigure(6,6,testValueO);
+        assertEquals(players[1],gameControllerWin.getWinner());
+
+    }
+
+    @Test
+    public void testGetWinnerForColumns() throws Exception {
+        final String gameName = "XO";
+        final Player[] players = new Player[2];
+        players[0] = new Player("Ox", Figure.X);
+        players[1] = new Player("Xo", Figure.O);
         final Figure testValue = Figure.O;
-        board.setFigure(0,0,testValue);
-        board.setFigure(1,0,testValue);
-        board.setFigure(2,0,testValue);
-        assertEquals(players[1],gameController.getWinner());
+        for (int i=0;i<3;i++) {
+            final Board board = new Board();
+            final GameController gameController = new GameController(gameName, players, board);
+            board.setFigure(i, 0, testValue);
+            board.setFigure(i, 1, testValue);
+            board.setFigure(i, 2, testValue);
+            assertEquals(players[1], gameController.getWinner());
+        }
+    }
+
+    @Test
+    public void testGetWinnerForLines() throws Exception {
+        final String gameName = "XO";
+        final Player[] players = new Player[2];
+        players[0] = new Player("Ox", Figure.X);
+        players[1] = new Player("Xo", Figure.O);
+        final Figure testValue = Figure.O;
+        for (int i=0;i<3;i++) {
+            final Board board = new Board();
+            final GameController gameController = new GameController(gameName, players, board);
+            board.setFigure(0, i, testValue);
+            board.setFigure(1, i, testValue);
+            board.setFigure(2, i, testValue);
+            assertEquals(players[1], gameController.getWinner());
+        }
     }
 
     @Test
