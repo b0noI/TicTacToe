@@ -46,7 +46,7 @@ public class ConsoleView  {
          }
     }
 
-    public void showBoard() throws InvalidPointException {
+    public void showBoard() {
         for (int i = 0 ; i < game.getBoard().getFiguresArray().length; i++) {
             showBoardLine(i);
             printLine(CHARACTER_HYPHEN, LINE_SIZE);
@@ -60,12 +60,16 @@ public class ConsoleView  {
         System.out.println();
     }
 
-    private void showBoardLine(final int row) throws InvalidPointException {
+    private void showBoardLine(final int row)  {
         for (int i = 0; i < game.getBoard().getRowLength(row); i++) {
-            if (game.getBoard().getFigure(row, i) == null) {
-                System.out.print(EMPTY_FIGURE);
-            } else {
-                System.out.print(game.getBoard().getFigure(row, i).toString());
+            try {
+                if (game.getBoard().getFigure(row, i) == null) {
+                    System.out.print(EMPTY_FIGURE);
+                } else {
+                    System.out.print(game.getBoard().getFigure(row, i).toString());
+                }
+            } catch (InvalidPointException e) {
+                e.printStackTrace();
             }
         }
         System.out.println();
