@@ -9,7 +9,7 @@ import com.java.laiy.model.exceptions.InvalidPointException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ConsoleView {
+public class ConsoleView  {
 
     private static final int LINE_SIZE = 3;
 
@@ -30,7 +30,7 @@ public class ConsoleView {
         this.game = game;
     }
 
-    public void start() {
+    public void startTurn() {
         System.out.println("Your turn, input coordinates: ");
         int x = getCoordinate(DEFAULT_PLAYER_1);
         int y = getCoordinate(DEFAULT_PLAYER_2);
