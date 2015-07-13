@@ -60,16 +60,24 @@ public class GameController {
         return board;
     }
 
-    public void move(final int x, final int y, final Figure figure) throws InvalidPointException, PointOccupiedException {
-        if (board.getFigure(x,y) != null) {
-            throw new PointOccupiedException();
-        }
-        else {
-            board.setFigure(x, y, figure);
+    public void move(final int x, final int y, final Player player) throws PointOccupiedException {
+        try {
+            if (board.getFigure(x,y) != null) {
+                throw new PointOccupiedException();
+            }
+            else {
+                try {
+                    board.setFigure(x, y, player.getFigure());
+                } catch (InvalidPointException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (InvalidPointException e) {
+            e.printStackTrace();
         }
     }
 
-    public Player getCurrentPlayer(final Player firstPlayer) throws InvalidPointException {
+    public Player getCurrentPlayer(final Player firstPlayer) {
         int firstPlayerNum = getFirstPlayerNum(firstPlayer);
         int[] playersTurns = getPlayersTurns();
 
@@ -88,13 +96,9 @@ public class GameController {
 
     private boolean checkLinesForWin(final String playerFigure) {
         for (int row = 0 ; row < board.getFiguresArray().length ; row++) {
-            try {
                 if ( getPlayerForLine(row, playerFigure) == board.getFiguresArray().length) {
                     return true;
                 }
-            } catch (InvalidPointException e) {
-                e.printStackTrace();
-            }
         }
         return false;
     }
@@ -153,15 +157,15 @@ public class GameController {
         return playerColumnCount;
     }
 
-    private int[] getPlayersTurns() throws InvalidPointException {
+    private int[] getPlayersTurns() {
         int[] playersTurns = new int[players.length];
         for ( int playerNum = 0 ; playerNum < players.length ; playerNum++) {
-            playersTurns[playerNum] = getPlayerForBoard(players[playerNum].getFigure().toString());
+                playersTurns[playerNum] = getPlayerForBoard(players[playerNum].getFigure().toString());
         }
         return playersTurns;
     }
 
-    private int getPlayerForBoard(final String playerFigure) throws InvalidPointException {
+    private int getPlayerForBoard(final String playerFigure) {
         int playerBoardCount = 0;
         for (int i = 0 ; i < board.getFiguresArray().length ; i++) {
             playerBoardCount += getPlayerForLine(i, playerFigure);
@@ -169,12 +173,16 @@ public class GameController {
         return playerBoardCount;
     }
 
-    private int getPlayerForLine(final int row, final String playerFigure) throws InvalidPointException {
+    private int getPlayerForLine(final int row, final String playerFigure) {
         int playerRowCount = 0;
         for (int i = 0; i < board.getRowLength(row) ; i++) {
+            try {
                 if ((board.getFigure(row, i) != null) && (board.getFigure(row, i).toString().equals(playerFigure))) {
                     playerRowCount++;
                 }
+            } catch (InvalidPointException e) {
+                e.printStackTrace();
+            }
         }
         return playerRowCount;
     }
