@@ -39,12 +39,10 @@ public class GameController {
 
     public Player getWinner() {
         for ( Player playerForCheck : players) {
-            if (checkRowsForWin(playerForCheck.getFigure().toString())) {
+            if (checkRowsForWin(playerForCheck.getFigure().toString()) ||
+                checkLinesForWin(playerForCheck.getFigure().toString()) ||
+                checkDiagsForWin(playerForCheck.getFigure().toString())) {
                 return playerForCheck;
-            } else {
-                if (checkLinesForWin(playerForCheck.getFigure().toString()) || checkDiagsForWin(playerForCheck.getFigure().toString())) {
-                    return playerForCheck;
-                }
             }
         }
         return null;
