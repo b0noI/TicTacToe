@@ -4,7 +4,7 @@ import com.java.laiy.model.exceptions.InvalidPointException;
 
 public interface IView {
 
-    public void start();
+    public void startTurn();
 
     public  void showGameName();
 
