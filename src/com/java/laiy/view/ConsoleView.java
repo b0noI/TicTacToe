@@ -9,7 +9,7 @@ import com.java.laiy.model.exceptions.InvalidPointException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ConsoleView  {
+public class ConsoleView implements IView {
 
     private static final int LINE_SIZE = 3;
 
