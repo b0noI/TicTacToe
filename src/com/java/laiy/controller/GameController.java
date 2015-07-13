@@ -37,7 +37,7 @@ public class GameController {
         this.players = players;
     }
 
-    public Player getWinner() throws InvalidPointException {
+    public Player getWinner() {
         for ( Player playerForCheck : players) {
             if (checkRowsForWin(playerForCheck.getFigure().toString())) {
                 return playerForCheck;
@@ -88,16 +88,20 @@ public class GameController {
         }
     }
 
-    private boolean checkLinesForWin(final String playerFigure) throws InvalidPointException {
+    private boolean checkLinesForWin(final String playerFigure) {
         for (int row = 0 ; row < board.getFiguresArray().length ; row++) {
-            if ( getPlayerForLine(row, playerFigure) == board.getFiguresArray().length) {
-                return true;
+            try {
+                if ( getPlayerForLine(row, playerFigure) == board.getFiguresArray().length) {
+                    return true;
+                }
+            } catch (InvalidPointException e) {
+                e.printStackTrace();
             }
         }
         return false;
     }
 
-    private boolean checkRowsForWin(final String playerFigure) throws InvalidPointException {
+    private boolean checkRowsForWin(final String playerFigure) {
         for (int column = 0 ; column < board.getFiguresArray().length ; column++) {
             if ( getPlayerForColumn(column, playerFigure) == board.getFiguresArray().length) {
                 return true;
@@ -106,7 +110,7 @@ public class GameController {
         return false;
     }
 
-    private boolean checkDiagsForWin(final String playerFigure) throws InvalidPointException {
+    private boolean checkDiagsForWin(final String playerFigure) {
         for (int diag_direction = 0 ; diag_direction < DIAGS_FOR_CHECK ; diag_direction++) {
             if ( getPlayerForDiag(diag_direction, playerFigure) == board.getFiguresArray().length) {
                 return true;
@@ -115,8 +119,9 @@ public class GameController {
         return false;
     }
 
-    private int getPlayerForDiag(final int direction, final String playerFigure) throws InvalidPointException {
+    private int getPlayerForDiag(final int direction, final String playerFigure) {
         int playerDiagCount = 0;
+        try {
         if ( direction == DIAG_UP ) {
             for (int i = 0; i < board.getFiguresArray().length ; i++) {
                 if ((board.getFigure(i, i) != null) && (board.getFigure(i, i).toString().equals(playerFigure) )) {
@@ -130,16 +135,22 @@ public class GameController {
                         playerDiagCount++;
                     }
             }
+        }} catch (InvalidPointException e) {
+            e.printStackTrace();
         }
         return playerDiagCount;
     }
 
-    private int getPlayerForColumn(final int column, final String playerFigure) throws InvalidPointException {
+    private int getPlayerForColumn(final int column, final String playerFigure) {
         int playerColumnCount = 0;
         for (int i = 0; i < board.getFiguresArray().length ; i++) {
+            try {
                 if ((board.getFigure(i, column) != null) && (board.getFigure(i, column).toString().equals(playerFigure))) {
                     playerColumnCount++;
                 }
+            } catch (InvalidPointException e) {
+                e.printStackTrace();
+            }
         }
         return playerColumnCount;
     }
