@@ -77,6 +77,21 @@ public class GameController {
         }
     }
 
+    public boolean getNextTurn(){
+        final Figure[][] figures =  getBoard().getFiguresArray();
+        if (getWinner() != null){
+            return false;
+        }
+        for (Figure[] figureArray : figures) {
+            for (Figure figureValue : figureArray) {
+                if (figureValue == null) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public Player getCurrentPlayer(final Player firstPlayer) {
         int firstPlayerNum = getFirstPlayerNum(firstPlayer);
         int[] playersTurns = getPlayersTurns();
