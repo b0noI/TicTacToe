@@ -12,7 +12,6 @@ public class RulesControllerTest {
     @Test
     public void testGetNextTurnWhenWin() throws Exception {
         final String gameName = "XO";
-        final Figure testValueO = Figure.O;
         final Board board = new Board();
         final Player[] players = new Player[2];
         players[0] = new Player("Ox", Figure.X);
@@ -34,7 +33,6 @@ public class RulesControllerTest {
     @Test
     public void testGetNextTurnWhenFull() throws Exception {
         final String gameName = "XO";
-        final Figure testValueO = Figure.O;
         final Board board = new Board();
         final Player[] players = new Player[2];
         players[0] = new Player("Ox", Figure.X);
@@ -60,4 +58,5 @@ public class RulesControllerTest {
         gameController.move(2,1,players[1]);
         assertEquals(false,rulesController.getNextTurn());
     }
+
 }
