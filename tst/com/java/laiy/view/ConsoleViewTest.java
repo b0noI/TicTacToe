@@ -92,4 +92,19 @@ public class ConsoleViewTest {
 
         assertEquals(expectedValue, outContent.toString());
     }
+
+    @Test
+    public void testShowWinner() throws Exception {
+        //TODO
+    }
+
+    @Test
+    public void testShowDraw() throws Exception {
+        //TODO
+    }
+
+    @Test
+    public void testShowPointOccupied() throws Exception {
+        //TODO
+    }
 }
