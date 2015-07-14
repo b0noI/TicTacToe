@@ -218,4 +218,52 @@ public class GameControllerTest {
         assertEquals(players[1],gameController.getCurrentPlayer(players[1]));
         assertEquals(players[0],gameController.getCurrentPlayer(players[0]));
     }
+
+    @Test
+    public void testGetNextTurnWhenWin() throws Exception {
+        final String gameName = "XO";
+        final Board board = new Board();
+        final Player[] players = new Player[2];
+        players[0] = new Player("Ox", Figure.X);
+        players[1] = new Player("Xo", Figure.O);
+        final GameController gameController = new GameController(gameName, players, board);
+        gameController.move(1,1,players[1]);
+        assertEquals(true,gameController.getNextTurn());
+        gameController.move(2,2,players[0]);
+        assertEquals(true,gameController.getNextTurn());
+        gameController.move(0,2,players[1]);
+        assertEquals(true,gameController.getNextTurn());
+        gameController.move(2,1,players[0]);
+        assertEquals(true,gameController.getNextTurn());
+        gameController.move(2,0,players[1]);
+        assertEquals(false,gameController.getNextTurn());
+    }
+
+    @Test
+    public void testGetNextTurnWhenFull() throws Exception {
+        final String gameName = "XO";
+        final Board board = new Board();
+        final Player[] players = new Player[2];
+        players[0] = new Player("Ox", Figure.X);
+        players[1] = new Player("Xo", Figure.O);
+        final GameController gameController = new GameController(gameName, players, board);
+        gameController.move(1,1,players[1]);
+        assertEquals(true,gameController.getNextTurn());
+        gameController.move(2,2,players[0]);
+        assertEquals(true,gameController.getNextTurn());
+        gameController.move(0,0,players[1]);
+        assertEquals(true,gameController.getNextTurn());
+        gameController.move(0,1,players[0]);
+        assertEquals(true,gameController.getNextTurn());
+        gameController.move(0,2,players[1]);
+        assertEquals(true,gameController.getNextTurn());
+        gameController.move(1,0,players[0]);
+        assertEquals(true,gameController.getNextTurn());
+        gameController.move(1,2,players[1]);
+        assertEquals(true,gameController.getNextTurn());
+        gameController.move(2,0,players[0]);
+        assertEquals(true,gameController.getNextTurn());
+        gameController.move(2,1,players[1]);
+        assertEquals(false,gameController.getNextTurn());
+    }
 }
