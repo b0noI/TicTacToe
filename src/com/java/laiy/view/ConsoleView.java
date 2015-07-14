@@ -49,6 +49,18 @@ public class ConsoleView implements IView {
         }
     }
 
+    public void  showWinner(){
+        System.out.println("The winner is " + game.getWinner().getName());
+    }
+
+    public void showDraw(){
+        System.out.println("Draw!");
+    }
+
+    public void showPointOccupied(){
+        System.out.println("Point already occupied!");
+    }
+
     private void printLine(final String lineCharacter, final int lineSize) {
         for (int i = 0; i < lineSize; i++) {
             System.out.print(lineCharacter);
