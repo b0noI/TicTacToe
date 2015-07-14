@@ -4,13 +4,11 @@ import com.java.laiy.controller.GameController;
 import com.java.laiy.model.Board;
 import com.java.laiy.model.Figure;
 import com.java.laiy.model.Player;
-import com.java.laiy.model.exceptions.InvalidPointException;
-import com.java.laiy.model.exceptions.PointOccupiedException;
 import com.java.laiy.view.ConsoleView;
 
 public class Main {
 
-    public static void main(final String[] args) throws InvalidPointException, PointOccupiedException {
+    public static void main(final String[] args) {
         final String GAME_NAME = "XO";
         final Board board = new Board();
         final Player[] players = new Player[2];
