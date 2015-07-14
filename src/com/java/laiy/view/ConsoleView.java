@@ -4,6 +4,7 @@ package com.java.laiy.view;
 import com.java.laiy.controller.GameController;
 import com.java.laiy.model.Player;
 import com.java.laiy.helpers.CoordinateHelper;
+import com.java.laiy.model.Point;
 import com.java.laiy.model.exceptions.InvalidPointException;
 
 import java.util.InputMismatchException;
@@ -17,10 +18,6 @@ public class ConsoleView implements IView {
 
     private static final String EMPTY_FIGURE = " ";
 
-    private static final String DEFAULT_PLAYER_1 = "X";
-
-    private static final String DEFAULT_PLAYER_2 = "O";
-
     private static final String INPUT_ERROR = "Coordinate is incorrect, please try again";
 
     protected final GameController game;
@@ -30,10 +27,9 @@ public class ConsoleView implements IView {
         this.game = game;
     }
 
-    public void startTurn() {
-        System.out.println("Your turn, input coordinates: ");
-        int x = getCoordinate(DEFAULT_PLAYER_1);
-        int y = getCoordinate(DEFAULT_PLAYER_2);
+    public Point startTurn() {
+        System.out.println("Next turn!");
+        return new Point(getCoordinate(),getCoordinate());
     }
 
     public  void showGameName() {
@@ -42,7 +38,7 @@ public class ConsoleView implements IView {
 
     public void showPlayers() {
          for (Player player : game.getPlayers()) {
-             System.out.println(player.getName() + ": " + player.getFigure().toString() );
+             System.out.println(player.getName() + ": " + player.getFigure().toString());
          }
     }
 
@@ -53,7 +49,7 @@ public class ConsoleView implements IView {
         }
     }
 
-    protected static void printLine(final String lineCharacter, final int lineSize) {
+    private void printLine(final String lineCharacter, final int lineSize) {
         for (int i = 0; i < lineSize; i++) {
             System.out.print(lineCharacter);
         }
@@ -68,16 +64,17 @@ public class ConsoleView implements IView {
                 } else {
                     System.out.print(game.getBoard().getFigure(row, i).toString());
                 }
-            } catch (InvalidPointException e) {
+            } catch (final InvalidPointException e) {
                 e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
         System.out.println();
     }
 
-    private int getCoordinate(final String coordinateName) {
+    private int getCoordinate() {
         while (true) {
-            System.out.print(String.format("Input the coordinate %s:", coordinateName));
+            System.out.print("Input the coordinate ");
             try {
                 final Scanner in = new Scanner(System.in);
                 int coordinate = in.nextInt() - 1;
