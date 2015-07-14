@@ -7,8 +7,13 @@ public enum Figure {
 
     private final String figure;
 
-    private Figure(final String figure){
-        assert figure != null;
-        this.figure = figure;
+    private Figure(final String figureName){
+        figure = figureName;
     }
+
+    @Override
+    public String toString() {
+        return figure;
+    }
+
 }

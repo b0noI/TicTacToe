@@ -4,54 +4,41 @@ package com.java.laiy.view;
 import com.java.laiy.controller.GameController;
 import com.java.laiy.model.Player;
 import com.java.laiy.helpers.CoordinateHelper;
+import com.java.laiy.model.Point;
+import com.java.laiy.model.exceptions.InvalidPointException;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ConsoleView {
+public class ConsoleView implements IView {
 
     private static final int LINE_SIZE = 3;
 
-    private static final String CHARACTER_HYPHEN = "-";
+    private static final String CHARACTER_HYPHEN = "_";
 
     private static final String EMPTY_FIGURE = " ";
 
-    private static final String COORDINATE_X = "X";
-
-    private static final String COORDINATE_Y = "Y";
-
     private static final String INPUT_ERROR = "Coordinate is incorrect, please try again";
 
-    public final GameController game;
+    protected final GameController game;
 
     public ConsoleView(final GameController game) {
         assert game != null;
         this.game = game;
     }
 
-    public int start(String coordinate, Player player) {
-        int x = 0;
-        switch(coordinate) {
-            case "X":
-                x = getCoordinate(COORDINATE_X, player);
-                break;
-            case "Y":
-                x = getCoordinate(COORDINATE_Y, player);
-                break;
-            default:
-                System.out.println();;
-                break;
-        }
-        return x;
+    public Point startTurn() {
+        System.out.println("Next turn!");
+        return new Point(getCoordinate(),getCoordinate());
     }
 
-    public void showGameName() {
+    public  void showGameName() {
         System.out.println(game.getGameName());
     }
 
     public void showPlayers() {
          for (Player player : game.getPlayers()) {
-             System.out.println(player.getName() + ": " + player.getFigure().toString() );
+             System.out.println(player.getName() + ": " + player.getFigure().toString());
          }
     }
 
@@ -62,28 +49,44 @@ public class ConsoleView {
         }
     }
 
-    public void showBoardLine(final int row) {
-        for (int i = 0; i < game.getBoard().getRowLength(row); i++) {
-            if (game.getBoard().getFigure(row, i) == null) {
-                System.out.print(EMPTY_FIGURE);
-            } else {
-                System.out.print(game.getBoard().getFigure(row, i).toString());
-            }
-        }
-        System.out.println();
+    public void  showWinner(){
+        System.out.println("The winner is " + game.getWinner().getName());
     }
 
-    public static void printLine(final String lineCharacter, final int lineSize) {
+    public void showDraw(){
+        System.out.println("Draw!");
+    }
+
+    public void showPointOccupied(){
+        System.out.println("Point already occupied!");
+    }
+
+    private void printLine(final String lineCharacter, final int lineSize) {
         for (int i = 0; i < lineSize; i++) {
             System.out.print(lineCharacter);
         }
         System.out.println();
     }
 
-    private int getCoordinate(final String coordinateName, final Player player) {
+    private void showBoardLine(final int row)  {
+        for (int i = 0; i < game.getBoard().getRowLength(row); i++) {
+            try {
+                if (game.getBoard().getFigure(row, i) == null) {
+                    System.out.print(EMPTY_FIGURE);
+                } else {
+                    System.out.print(game.getBoard().getFigure(row, i).toString());
+                }
+            } catch (final InvalidPointException e) {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+        System.out.println();
+    }
+
+    private int getCoordinate() {
         while (true) {
-            System.out.print(player.getName() + ", ");
-            System.out.print(String.format("input the coordinate %s:", coordinateName));
+            System.out.print("Input the coordinate ");
             try {
                 final Scanner in = new Scanner(System.in);
                 int coordinate = in.nextInt() - 1;
