@@ -13,7 +13,7 @@ public interface IView {
 
     public void showBoard();
 
-    public void  showWinner();
+    public void showWinner();
 
     public void showDraw();
 
