@@ -3,7 +3,6 @@ package com.java.laiy.view;
 
 import com.java.laiy.controller.GameController;
 import com.java.laiy.model.Player;
-import com.java.laiy.helpers.CoordinateHelper;
 import com.java.laiy.model.Point;
 import com.java.laiy.model.exceptions.InvalidPointException;
 
