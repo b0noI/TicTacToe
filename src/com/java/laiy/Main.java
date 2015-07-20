@@ -1,5 +1,6 @@
 package com.java.laiy;
 
+import com.java.laiy.controller.Game;
 import com.java.laiy.controller.GameController;
 import com.java.laiy.model.Board;
 import com.java.laiy.model.Figure;
