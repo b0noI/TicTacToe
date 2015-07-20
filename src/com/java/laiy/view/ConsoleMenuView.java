@@ -6,7 +6,6 @@ import com.java.laiy.model.Board;
 import com.java.laiy.model.Figure;
 import com.java.laiy.model.Player;
 
-import javax.xml.soap.SOAPPart;
 import java.util.Scanner;
 
 public class ConsoleMenuView {
