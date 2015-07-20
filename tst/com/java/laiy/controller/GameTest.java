@@ -1,4 +1,4 @@
-package com.java.laiy;
+package com.java.laiy.controller;
 
 import org.junit.Test;
 
