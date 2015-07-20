@@ -45,7 +45,7 @@ public class ConsoleView implements IView {
     public void showBoard() {
         for (int i = 0 ; i < game.getBoard().getFiguresArray().length; i++) {
             showBoardLine(i);
-            printLine(CHARACTER_HYPHEN, LINE_SIZE);
+            printLine(CHARACTER_HYPHEN, game.getBoard().getFiguresArray().length);
         }
     }
 
@@ -90,7 +90,7 @@ public class ConsoleView implements IView {
             try {
                 final Scanner in = new Scanner(System.in);
                 int coordinate = in.nextInt() - 1;
-                if (CoordinateHelper.checkCoordinate(coordinate)) {
+                if (game.getBoard().checkCoordinate(coordinate)) {
                     return coordinate;
                 }
                 else {
