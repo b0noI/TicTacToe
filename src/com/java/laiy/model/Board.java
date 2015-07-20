@@ -1,8 +1,6 @@
 package com.java.laiy.model;
 
-import com.java.laiy.helpers.CoordinateHelper;
 import com.java.laiy.model.exceptions.InvalidPointException;
-import com.java.laiy.model.exceptions.PointOccupiedException;
 
 public class Board {
 
@@ -55,11 +53,8 @@ public class Board {
         return (checkCoordinate(x) && checkCoordinate(y));
     }
 
-    private boolean checkCoordinate(final int coordinate) {
-        if (coordinate < MIN_COORDINATE || coordinate > figures.length - 1) {
-            return false;
-        }
-        return true;
+    public boolean checkCoordinate(final int coordinate) {
+        return !(coordinate < MIN_COORDINATE || coordinate > figures.length - 1);
     }
 
 }
