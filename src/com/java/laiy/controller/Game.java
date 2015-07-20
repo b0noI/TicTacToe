@@ -1,35 +1,34 @@
-package com.java.laiy;
+package com.java.laiy.controller;
 
-import com.java.laiy.controller.GameController;
 import com.java.laiy.model.Point;
 import com.java.laiy.model.exceptions.PointOccupiedException;
-import com.java.laiy.view.ConsoleView;
+import com.java.laiy.view.IView;
 
 public class Game {
 
-    final private ConsoleView consoleView;
+    final private IView iview;
     final private GameController gameController;
 
-    public Game(ConsoleView consoleView, GameController gameController) {
-        this.consoleView = consoleView;
+    public Game(IView iview, GameController gameController) {
+        this.iview = iview;
         this.gameController = gameController;
     }
 
     public void theGame(){
         while (gameController.getNextTurn()) {
-            Point point = consoleView.startTurn();
+            Point point = iview.startTurn();
             try {
                 gameController.move(point.getX(), point.getY(), gameController.getCurrentPlayer(gameController.getPlayers()[0]));
             } catch (PointOccupiedException e) {
-                consoleView.showPointOccupied();
+                iview.showPointOccupied();
             }
-            consoleView.showBoard();
+            iview.showBoard();
         }
         if (gameController.getWinner() != null){
-            consoleView.showWinner();
+            iview.showWinner();
         }
         else {
-            consoleView.showDraw();
+            iview.showDraw();
         }
     }
 }
