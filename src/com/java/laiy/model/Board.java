@@ -1,10 +1,9 @@
 package com.java.laiy.model;
 
+import com.java.laiy.helpers.CoordinateHelper;
 import com.java.laiy.model.exceptions.InvalidPointException;
 
 public class Board {
-
-    private static final int MIN_COORDINATE = 0;
 
     private static final int DEFAULT_BOARD_SIZE = 3;
 
@@ -24,7 +23,7 @@ public class Board {
     }
 
     public void setFigure(final int x, final int y, final Figure figure) throws InvalidPointException {
-        if (!checkCoordinates(x, y)) {
+        if (!CoordinateHelper.checkCoordinates(x, y)) {
             throw new InvalidPointException();
         }
         else {
@@ -33,7 +32,7 @@ public class Board {
     }
 
     public Figure getFigure(final int x, final int y) throws InvalidPointException{
-        if (!checkCoordinates(x, y)) {
+        if (!CoordinateHelper.checkCoordinates(x, y)) {
             throw new InvalidPointException();
         }
         else {
@@ -47,14 +46,6 @@ public class Board {
 
     public int getRowLength(final int row) {
         return figures[row].length;
-    }
-
-    private boolean checkCoordinates(final int x, final int y){
-        return (checkCoordinate(x) && checkCoordinate(y));
-    }
-
-    public boolean checkCoordinate(final int coordinate) {
-        return !(coordinate < MIN_COORDINATE || coordinate > figures.length - 1);
     }
 
 }
