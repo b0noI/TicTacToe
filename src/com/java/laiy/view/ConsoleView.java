@@ -2,7 +2,6 @@ package com.java.laiy.view;
 
 
 import com.java.laiy.controller.GameController;
-import com.java.laiy.helpers.CoordinateHelper;
 import com.java.laiy.model.Player;
 import com.java.laiy.model.Point;
 import com.java.laiy.model.exceptions.InvalidPointException;
@@ -89,7 +88,7 @@ public class ConsoleView implements IView {
             try {
                 final Scanner in = new Scanner(System.in);
                 int coordinate = in.nextInt() - 1;
-                if (CoordinateHelper.checkCoordinate(coordinate)) {
+                if (game.getBoard().checkCoordinate(coordinate)) {
                     return coordinate;
                 }
                 else {
