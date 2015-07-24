@@ -2,6 +2,7 @@ package com.java.laiy.view;
 
 
 import com.java.laiy.controller.GameController;
+import com.java.laiy.helpers.CoordinateHelper;
 import com.java.laiy.model.Player;
 import com.java.laiy.model.Point;
 import com.java.laiy.model.exceptions.InvalidPointException;
@@ -11,11 +12,11 @@ import java.util.Scanner;
 
 public class ConsoleView implements IView {
 
-    private static final String CHARACTER_HYPHEN = "_";
+    private static final String CHARACTER_HYPHEN = "-";
 
     private static final String EMPTY_FIGURE = " ";
 
-    private static final String INPUT_ERROR = "Coordinate is incorrect, please try again";
+    private static final String INPUT_ERROR = "Incorrect input, please try again";
 
     protected final GameController game;
 
@@ -88,7 +89,7 @@ public class ConsoleView implements IView {
             try {
                 final Scanner in = new Scanner(System.in);
                 int coordinate = in.nextInt() - 1;
-                if (game.getBoard().checkCoordinate(coordinate)) {
+                if (CoordinateHelper.checkCoordinate(coordinate)) {
                     return coordinate;
                 }
                 else {
