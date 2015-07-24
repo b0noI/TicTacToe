@@ -24,20 +24,20 @@ public class Board {
     }
 
     public void setFigure(final int x, final int y, final Figure figure) throws InvalidPointException {
-        if (!checkCoordinates(x, y)) {
-            throw new InvalidPointException();
+        if (checkCoordinates(x, y)) {
+            figures[x][y] = figure;
         }
         else {
-            figures[x][y] = figure;
+            throw new InvalidPointException();
         }
     }
 
     public Figure getFigure(final int x, final int y) throws InvalidPointException{
-        if (!checkCoordinates(x, y)) {
-            throw new InvalidPointException();
+        if (checkCoordinates(x, y)) {
+            return figures[x][y];
         }
         else {
-            return figures[x][y];
+            throw new InvalidPointException();
         }
     }
 
@@ -54,7 +54,7 @@ public class Board {
     }
 
     public boolean checkCoordinate(final int coordinate) {
-        return !(coordinate < MIN_COORDINATE || coordinate > figures.length - 1);
+        return (coordinate >= MIN_COORDINATE && coordinate <= figures.length - 1);
     }
 
 }
