@@ -1,7 +1,6 @@
 package com.java.laiy.model;
 
 import com.java.laiy.model.exceptions.InvalidPointException;
-import com.java.laiy.model.exceptions.PointOccupiedException;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
