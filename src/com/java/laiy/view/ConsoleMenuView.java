@@ -5,7 +5,6 @@ import com.java.laiy.controller.GameController;
 import com.java.laiy.model.Board;
 import com.java.laiy.model.Figure;
 import com.java.laiy.model.Player;
-import com.java.laiy.model.exceptions.GoodButBadBoardSizeException;
 import com.java.laiy.model.exceptions.InvalidBoardSizeException;
 
 import java.util.InputMismatchException;
@@ -24,8 +23,6 @@ public class ConsoleMenuView {
     private static int BOARD_SIZE;
 
     private static final int MIN_SIZE = 3;
-
-    private static final int WRONG_SIZE = 0;
 
     public static void showMenuWithResult() {
 
@@ -60,10 +57,6 @@ public class ConsoleMenuView {
         }
     }
 
-    public static int getSize(){
-        return BOARD_SIZE;
-    }
-
     private static void defaultStart(){
         final String gameName = "XO";
         BOARD_SIZE = 3;
@@ -88,20 +81,12 @@ public class ConsoleMenuView {
         try {
             System.out.println("Enter board size:");
             BOARD_SIZE = input.nextInt();
-            if (BOARD_SIZE <= WRONG_SIZE){
+            if (BOARD_SIZE < MIN_SIZE){
                 throw new InvalidBoardSizeException();
             }
-            if (BOARD_SIZE > WRONG_SIZE && BOARD_SIZE < MIN_SIZE){
-                throw new GoodButBadBoardSizeException();
-            }
-
         }
         catch (final InputMismatchException | InvalidBoardSizeException e){
-            System.out.println("Input is wrong, please enter correct integer greater than zero");
-            enterSize();
-        }
-        catch (final GoodButBadBoardSizeException e){
-            System.out.println("Size must be equal or greater than 3, please try again");
+            System.out.println("Input is wrong, please enter correct integer greater than 3");
             enterSize();
         }
         return BOARD_SIZE;
@@ -115,7 +100,6 @@ public class ConsoleMenuView {
         final GameController gameController = new GameController(gameName, players, board);
         final ConsoleView consoleView = new ConsoleView(gameController);
         final Game game = new Game(consoleView,gameController);
-        consoleView.showGameName();
         consoleView.showPlayers();
         game.theGame();
     }
