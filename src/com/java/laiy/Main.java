@@ -9,5 +9,4 @@ public class Main {
         ConsoleMenuView.showMenuWithResult();
     }
 
-
 }
