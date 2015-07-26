@@ -1,10 +1,15 @@
 package com.java.laiy.view;
 
+import com.java.laiy.controller.Game;
 import com.java.laiy.controller.GameController;
 import com.java.laiy.model.Board;
 import com.java.laiy.model.Figure;
 import com.java.laiy.model.Player;
 import org.junit.*;
+import org.junit.Rule;
+import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
+import org.junit.contrib.java.lang.system.SystemErrRule;
+import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -15,6 +20,12 @@ public class ConsoleViewTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+
+    @Rule
+    public final TextFromStandardInputStream systemInMock = TextFromStandardInputStream.emptyStandardInputStream();
+
+    @Rule
+    public final StandardOutputStreamLog log = new StandardOutputStreamLog();
 
     @Before
     public void setUpStreams() {
@@ -84,27 +95,56 @@ public class ConsoleViewTest {
         board.setFigure(2,2,testValue);
         consoleView.showBoard();
         final String expectedValue =    "O  \n" +
-                                        "___\n" +
+                                        "---\n" +
                                         " O \n" +
-                                        "___\n" +
+                                        "---\n" +
                                         "  O\n" +
-                                        "___\n";
+                                        "---\n";
 
         assertEquals(expectedValue, outContent.toString());
     }
 
     @Test
     public void testShowWinner() throws Exception {
-        //TODO
+        final String GAME_NAME = "XO";
+        final String expectedValueO = "Oleg";
+        final Board board = new Board();
+        final Player[] players = new Player[2];
+        players[0] = new Player("Xonstantin", Figure.X);
+        players[1] = new Player("Oleg", Figure.O);
+        final GameController game = new GameController(GAME_NAME, players, board);
+        final ConsoleView consoleView = new ConsoleView(game);
+        Figure testValue = Figure.O;
+        board.setFigure(0,0,testValue);
+        board.setFigure(1,1,testValue);
+        board.setFigure(2,2,testValue);
+        consoleView.showWinner();
+        assertEquals("The winner is " + expectedValueO + "\n", outContent.toString());
     }
 
     @Test
     public void testShowDraw() throws Exception {
-        //TODO
+        final String GAME_NAME = "XO";
+        final Board board = new Board();
+        final Player[] players = new Player[2];
+        players[0] = new Player("Xonstantin", Figure.X);
+        players[1] = new Player("Oleg", Figure.O);
+        final GameController game = new GameController(GAME_NAME, players, board);
+        final ConsoleView consoleView = new ConsoleView(game);
+        consoleView.showDraw();
+        assertEquals("Draw!" + "\n", outContent.toString());
     }
 
     @Test
     public void testShowPointOccupied() throws Exception {
-        //TODO
+        final String GAME_NAME = "XO";
+        final Board board = new Board();
+        final Player[] players = new Player[2];
+        players[0] = new Player("Xonstantin", Figure.X);
+        players[1] = new Player("Oleg", Figure.O);
+        final GameController game = new GameController(GAME_NAME, players, board);
+        final ConsoleView consoleView = new ConsoleView(game);
+        consoleView.showPointOccupied();
+        assertEquals("Point already occupied!" + "\n", outContent.toString());
     }
 }
