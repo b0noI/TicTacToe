@@ -1,7 +1,7 @@
 
 package com.java.laiy;
 
-import com.java.laiy.view.ConsoleMenuView;
+import com.java.laiy.view.*;
 
 public class Main {
 
