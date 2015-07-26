@@ -82,18 +82,18 @@ public class ConsoleView implements IView {
         System.out.println();
     }
 
-    private int getCoordinate() {
+    protected int getCoordinate() {
         while (true) {
             System.out.print("Input the coordinate ");
             try {
                 final Scanner in = new Scanner(System.in);
-                int coordinate = in.nextInt() - 1;
-                if (game.getBoard().checkCoordinate(coordinate)) {
-                    return coordinate;
-                }
-                else {
-                    System.out.println(INPUT_ERROR);
-                }
+                    int coordinate = in.nextInt() - 1;
+                    if (game.getBoard().checkCoordinate(coordinate)) {
+                        return coordinate;
+                    }
+                    else {
+                        System.out.println(INPUT_ERROR);
+                    }
             }
             catch (final InputMismatchException e) {
                 System.out.println(INPUT_ERROR);
