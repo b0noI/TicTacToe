@@ -1,31 +1,21 @@
 package com.java.laiy.view;
 
-import com.java.laiy.controller.Game;
 import com.java.laiy.controller.GameController;
 import com.java.laiy.model.Board;
 import com.java.laiy.model.Figure;
 import com.java.laiy.model.Player;
 import org.junit.*;
-import org.junit.Rule;
-import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
-import org.junit.contrib.java.lang.system.SystemErrRule;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
-
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
+import java.util.NoSuchElementException;
 import static org.junit.Assert.assertEquals;
 
 public class ConsoleViewTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-
-    @Rule
-    public final TextFromStandardInputStream systemInMock = TextFromStandardInputStream.emptyStandardInputStream();
-
-    @Rule
-    public final StandardOutputStreamLog log = new StandardOutputStreamLog();
 
     @Before
     public void setUpStreams() {
@@ -39,8 +29,11 @@ public class ConsoleViewTest {
         System.setErr(null);
     }
 
+    @Rule
+    public TextFromStandardInputStream systemInMock = TextFromStandardInputStream.emptyStandardInputStream();
+
     @Test
-    public void testStartTurn() throws Exception {
+    public void testStartTurn() throws Exception{
         final String GAME_NAME = "XO";
         final Board board = new Board();
         final Player[] players = new Player[2];
@@ -48,9 +41,97 @@ public class ConsoleViewTest {
         players[1] = new Player("Oleg", Figure.O);
         final GameController game = new GameController(GAME_NAME, players, board);
         final ConsoleView consoleView = new ConsoleView(game);
-        // TODO
+        ByteArrayInputStream in = new ByteArrayInputStream("String for incorrect input\n".getBytes());
+        System.setIn(in);
+        try {
+            consoleView.startTurn();
+        }
+        catch (final NoSuchElementException e){
+            e.printStackTrace();
+        }
+        assertEquals("Next turn!\n" +
+                "Input the coordinate Incorrect input, please try again\n" +
+                "Input the coordinate ", outContent.toString());
+        outContent.reset();
+
+        ByteArrayInputStream in1 = new ByteArrayInputStream("2\n3\n".getBytes());
+        System.setIn(in1);
+        try {
+            consoleView.startTurn();
+        }
+        catch (final NoSuchElementException e){
+            e.printStackTrace();
+        }
+        assertEquals("Next turn!\n" +
+                "Input the coordinate Input the coordinate ", outContent.toString());
+        outContent.reset();
+
+        ByteArrayInputStream in2 = new ByteArrayInputStream("-77\n".getBytes());
+        System.setIn(in2);
+        try {
+            consoleView.startTurn();
+        }
+        catch (final NoSuchElementException e){
+            e.printStackTrace();
+        }
+        assertEquals("Next turn!\n" +
+                "Input the coordinate Incorrect input, please try again\n" +
+                "Input the coordinate ", outContent.toString());
+        outContent.reset();
+    }
+
+    @Test
+    public void testSetCoordinates() throws Exception {
+        final String GAME_NAME = "XO";
+        final Board board = new Board();
+        final Player[] players = new Player[2];
+        players[0] = new Player("Xonstantin", Figure.X);
+        players[1] = new Player("Oleg", Figure.O);
+        final GameController game = new GameController(GAME_NAME, players, board);
+        final ConsoleView consoleView = new ConsoleView(game);
+
+        ByteArrayInputStream in = new ByteArrayInputStream("String for incorrect input\n".getBytes());
+        System.setIn(in);
+        try {
+            consoleView.getCoordinate();
+        }
+        catch (final NoSuchElementException e){
+            e.printStackTrace();
+        }
+        assertEquals("Input the coordinate Incorrect input, please try again\n" +
+                "Input the coordinate ", outContent.toString());
+
+        outContent.reset();
+
+        ByteArrayInputStream in1 = new ByteArrayInputStream("-77".getBytes());
+        System.setIn(in1);
+        try {
+            consoleView.getCoordinate();
+        }
+        catch (final NoSuchElementException e){
+            e.printStackTrace();
+        }
+        assertEquals("Input the coordinate Incorrect input, please try again\n" +
+                "Input the coordinate ", outContent.toString());
+
+        outContent.reset();
+
+        ByteArrayInputStream in2 = new ByteArrayInputStream("2".getBytes());
+        System.setIn(in2);
+        try {
+            consoleView.getCoordinate();
+        }
+        catch (final NoSuchElementException e){
+            e.printStackTrace();
+        }
+        assertEquals("Input the coordinate ", outContent.toString());
+
+        ByteArrayInputStream in3 = new ByteArrayInputStream("3\n".getBytes());
+        System.setIn(in3);
+        assertEquals(2, consoleView.getCoordinate());
 
     }
+
 
     @Test
     public void testShowGameName() throws Exception {
