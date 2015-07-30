@@ -5,7 +5,6 @@ import com.java.laiy.model.Board;
 import com.java.laiy.model.Figure;
 import com.java.laiy.model.Player;
 import org.junit.*;
-import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -28,9 +27,6 @@ public class ConsoleViewTest {
         System.setOut(null);
         System.setErr(null);
     }
-
-    @Rule
-    public TextFromStandardInputStream systemInMock = TextFromStandardInputStream.emptyStandardInputStream();
 
     @Test
     public void testStartTurn() throws Exception{
