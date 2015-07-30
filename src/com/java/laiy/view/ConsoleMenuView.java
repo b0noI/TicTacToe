@@ -33,28 +33,35 @@ public class ConsoleMenuView {
         System.out.println(EXIT_CODE + " - Exit");
         System.out.print("> ");
 
-        final Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-
-        switch (choice) {
-            case START_CODE:
-                System.out.println("A new game started");
-                defaultStart();
-                break;
-            case LOAD_CODE:
-                System.out.println("Loading...");
-                //TODO
-                break;
-            case SETTINGS_CODE:
-                customInput();
-                break;
-            case EXIT_CODE:
-                System.out.println("Exit");
-                break;
-            default:
-                System.out.println("Choice is incorrect, please try again");
-                break;
+        try {
+            final Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case START_CODE:
+                    System.out.println("A new game started");
+                    defaultStart();
+                    break;
+                case LOAD_CODE:
+                    System.out.println("Loading...");
+                    //TODO
+                    break;
+                case SETTINGS_CODE:
+                    customInput();
+                    break;
+                case EXIT_CODE:
+                    System.out.println("Exit");
+                    break;
+                default:
+                    System.out.println("Choice is incorrect, please try again");
+                    break;
+            }
         }
+        catch (final InputMismatchException e)
+        {
+            System.out.println("Please enter correct choice");
+            showMenuWithResult();
+        }
+
     }
 
     private static void defaultStart(){
