@@ -17,6 +17,8 @@ public interface IView {
 
     public void showDraw();
 
+    public void anotherGame();
+
     public void showPointOccupied();
 
 }
