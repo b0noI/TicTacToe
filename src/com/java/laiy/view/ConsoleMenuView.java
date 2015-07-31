@@ -53,6 +53,7 @@ public class ConsoleMenuView {
                     break;
                 default:
                     System.out.println("Choice is incorrect, please try again");
+                    showMenuWithResult();
                     break;
             }
         }
