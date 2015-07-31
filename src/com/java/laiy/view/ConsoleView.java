@@ -59,6 +59,31 @@ public class ConsoleView implements IView {
         System.out.println("Point already occupied!");
     }
 
+    public void anotherGame() {
+        System.out.println("Want another game? Press y/n");
+        try {
+            final Scanner scanner = new Scanner(System.in);
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "y":
+                    ConsoleMenuView.showMenuWithResult();
+                    break;
+                case "n":
+                    System.out.println("Exit...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Please enter \"y\" or \"n\"");
+                    break;
+            }
+        }
+        catch (final InputMismatchException e)
+        {
+            System.out.println("Please enter \"y\" or \"n\"");
+            anotherGame();
+        }
+    }
+
     private void printLine(final String lineCharacter, final int lineSize) {
         for (int i = 0; i < lineSize; i++) {
             System.out.print(lineCharacter);
