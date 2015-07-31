@@ -40,7 +40,7 @@ public class GameTest {
         players[1] = new Player("Oleg", Figure.O);
         final GameController game = new GameController(GAME_NAME, players, board);
         final ConsoleView consoleView = new ConsoleView(game);
-        final Game gameGo = new Game(consoleView, game);
+        final Game gameGo = new Game(consoleView);
         ByteArrayInputStream in = new ByteArrayInputStream("asd\n".getBytes());
         System.setIn(in);
         try {
@@ -77,7 +77,7 @@ public class GameTest {
         players[1] = new Player("Oleg", Figure.O);
         final GameController game = new GameController(GAME_NAME, players, board);
         final ConsoleView consoleView = new ConsoleView(game);
-        final Game gameGo = new Game(consoleView, game);
+        final Game gameGo = new Game(consoleView);
         ByteArrayInputStream in = new ByteArrayInputStream("asd\n".getBytes());
         System.setIn(in);
         try {
