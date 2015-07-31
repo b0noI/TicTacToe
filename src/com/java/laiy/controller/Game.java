@@ -26,9 +26,11 @@ public class Game {
         }
         if (gameController.getWinner() != null){
             iview.showWinner();
+            iview.anotherGame();
         }
         else {
             iview.showDraw();
+            iview.anotherGame();
         }
     }
 }
