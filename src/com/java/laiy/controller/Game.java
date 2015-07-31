@@ -9,9 +9,9 @@ public class Game {
     final private IView iview;
     final private GameController gameController;
 
-    public Game(IView iview, GameController gameController) {
+    public Game(IView iview) {
         this.iview = iview;
-        this.gameController = gameController;
+        this.gameController = iview.getGameController();
     }
 
     public void theGame(){
