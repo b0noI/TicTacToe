@@ -24,6 +24,10 @@ public class ConsoleView implements IView {
         this.game = game;
     }
 
+    public GameController getGameController(){
+        return game;
+    }
+
     public Point startTurn() {
         System.out.println("Next turn!");
         return new Point(getCoordinate(),getCoordinate());
