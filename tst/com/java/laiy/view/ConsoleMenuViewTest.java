@@ -1,5 +1,10 @@
 package com.java.laiy.view;
 
+import com.java.laiy.controller.Game;
+import com.java.laiy.controller.GameController;
+import com.java.laiy.model.Board;
+import com.java.laiy.model.Figure;
+import com.java.laiy.model.Player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,5 +56,19 @@ public class ConsoleMenuViewTest {
                     "4 - Exit\n" +
                     "> ", outContent.toString());
         outContent.reset();
+    }
+
+    @Test
+    public void testDefaultStart() throws Exception {
+        final String GAME_NAME = "XO";
+        final Board board = new Board();
+        final Player[] players = new Player[2];
+        players[0] = new Player("PLAYER X", Figure.X);
+        players[1] = new Player("PLAYER O", Figure.O);
+        final GameController gameController = new GameController(GAME_NAME, players, board);
+        final ConsoleView consoleView = new ConsoleView(gameController);
+        final Game expectedGame = new Game(consoleView);
+
+        assertEquals(expectedGame, ConsoleMenuView.defaultStart());
     }
 }
