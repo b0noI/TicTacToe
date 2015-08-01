@@ -1,10 +1,7 @@
 package com.java.laiy.view;
 
 import com.java.laiy.controller.Game;
-import com.java.laiy.controller.GameController;
-import com.java.laiy.model.Board;
-import com.java.laiy.model.Figure;
-import com.java.laiy.model.Player;
+import com.java.laiy.controller.GameStarter;
 import com.java.laiy.model.exceptions.InvalidBoardSizeException;
 
 import java.util.InputMismatchException;
@@ -39,7 +36,7 @@ public class ConsoleMenuView {
             switch (choice) {
                 case START_CODE:
                     System.out.println("A new game started");
-                    defaultStart().theGame();
+                    GameStarter.defaultStart().theGame();
                     break;
                 case LOAD_CODE:
                     System.out.println("Loading...");
@@ -65,15 +62,7 @@ public class ConsoleMenuView {
 
     }
 
-    protected static Game defaultStart(){
-        final String gameName = "XO";
-        BOARD_SIZE = 3;
-        final String playerOneName = "PLAYER X";
-        final String playerTwoName = "PLAYER O";
-        return customStart(BOARD_SIZE,playerOneName,playerTwoName, gameName);
-    }
-
-    private static Game customInput() {
+    protected static Game customInput() {
         Scanner input = new Scanner(System.in);
         final String gameName = "XO";
         System.out.println("Enter player one name:");
@@ -81,10 +70,10 @@ public class ConsoleMenuView {
         System.out.println("Enter player two name:");
         String playerTwoName = input.nextLine();
         final int boardSize = enterSize();
-        return customStart(boardSize,playerOneName,playerTwoName, gameName);
+        return GameStarter.customStart(boardSize,playerOneName,playerTwoName, gameName);
     }
 
-    private static int enterSize(){
+    protected static int enterSize(){
         Scanner input = new Scanner(System.in);
         try {
             System.out.println("Enter board size:");
@@ -98,18 +87,6 @@ public class ConsoleMenuView {
             enterSize();
         }
         return BOARD_SIZE;
-    }
-
-    private static Game customStart(final int BOARD_SIZE, final String playerOneName, final String playerTwoName, final String gameName){
-        final Board board = new Board(BOARD_SIZE);
-        final Player[] players = new Player[2];
-        players[0] = new Player(playerOneName, Figure.X);
-        players[1] = new Player(playerTwoName, Figure.O);
-        final GameController gameController = new GameController(gameName, players, board);
-        final ConsoleView consoleView = new ConsoleView(gameController);
-        final Game game = new Game(consoleView);
-        consoleView.showPlayers();
-        return game;
     }
 
 }
