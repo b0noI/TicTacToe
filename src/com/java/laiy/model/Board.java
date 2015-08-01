@@ -1,5 +1,6 @@
 package com.java.laiy.model;
 
+import com.java.laiy.model.exceptions.InvalidBoardSizeException;
 import com.java.laiy.model.exceptions.InvalidPointException;
 
 public class Board {
@@ -10,13 +11,14 @@ public class Board {
 
     private final Figure[][] figures;
 
-    public Board() {
+    public Board() throws InvalidBoardSizeException {
         this(DEFAULT_BOARD_SIZE);
     }
 
-    public Board(final int customBoardSize) {
+    public Board(final int customBoardSize) throws InvalidBoardSizeException {
         if (customBoardSize < DEFAULT_BOARD_SIZE) {
             this.figures = new Figure[DEFAULT_BOARD_SIZE][DEFAULT_BOARD_SIZE];
+            throw new InvalidBoardSizeException();
         }
          else {
             this.figures = new Figure[customBoardSize][customBoardSize];
