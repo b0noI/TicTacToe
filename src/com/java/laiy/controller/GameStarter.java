@@ -3,6 +3,7 @@ package com.java.laiy.controller;
 import com.java.laiy.model.Board;
 import com.java.laiy.model.Figure;
 import com.java.laiy.model.Player;
+import com.java.laiy.model.exceptions.InvalidBoardSizeException;
 import com.java.laiy.view.ConsoleView;
 
 public class GameStarter {
@@ -16,7 +17,13 @@ public class GameStarter {
     }
 
     public static Game customStart(final int BOARD_SIZE, final String playerOneName, final String playerTwoName, final String gameName){
-        final Board board = new Board(BOARD_SIZE);
+        Board board = null;
+        try {
+            board = new Board(BOARD_SIZE);
+        }
+        catch (InvalidBoardSizeException e){
+            e.printStackTrace();
+        }
         final Player[] players = new Player[2];
         players[0] = new Player(playerOneName, Figure.X);
         players[1] = new Player(playerTwoName, Figure.O);
