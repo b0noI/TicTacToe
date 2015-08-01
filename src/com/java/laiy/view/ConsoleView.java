@@ -78,6 +78,7 @@ public class ConsoleView implements IView {
                     break;
                 default:
                     System.out.println("Please enter \"y\" or \"n\"");
+                    anotherGame();
                     break;
             }
         }
