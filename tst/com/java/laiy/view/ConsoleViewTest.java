@@ -286,4 +286,16 @@ public class ConsoleViewTest {
                 "4 - Exit\n" +
                 "> ", outContent.toString());
     }
+
+    @Test
+    public void testGetGameController() throws Exception{
+        final String GAME_NAME = "XO";
+        final Board board = new Board();
+        final Player[] players = new Player[2];
+        players[0] = new Player("Xonstantin", Figure.X);
+        players[1] = new Player("Oleg", Figure.O);
+        final GameController game = new GameController(GAME_NAME, players, board);
+        final ConsoleView consoleView = new ConsoleView(game);
+        assertEquals(game,consoleView.getGameController());
+    }
 }
