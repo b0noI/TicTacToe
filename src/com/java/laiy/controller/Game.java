@@ -33,4 +33,8 @@ public class Game {
             iview.anotherGame();
         }
     }
+
+    protected GameController getGameController(){
+        return gameController;
+    }
 }
