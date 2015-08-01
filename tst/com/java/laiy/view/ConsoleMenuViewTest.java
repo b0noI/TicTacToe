@@ -1,10 +1,5 @@
 package com.java.laiy.view;
 
-import com.java.laiy.controller.Game;
-import com.java.laiy.controller.GameController;
-import com.java.laiy.model.Board;
-import com.java.laiy.model.Figure;
-import com.java.laiy.model.Player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +29,7 @@ public class ConsoleMenuViewTest {
     }
 
     @Test
-    public void testShowMenuWithResult() throws Exception {
+    public void testShowMenuWithResultIncorrectInput() throws Exception {
         ByteArrayInputStream in = new ByteArrayInputStream("String for incorrect input\n".getBytes());
         System.setIn(in);
         try {
@@ -59,16 +54,139 @@ public class ConsoleMenuViewTest {
     }
 
     @Test
-    public void testDefaultStart() throws Exception {
-        final String GAME_NAME = "XO";
-        final Board board = new Board();
-        final Player[] players = new Player[2];
-        players[0] = new Player("PLAYER X", Figure.X);
-        players[1] = new Player("PLAYER O", Figure.O);
-        final GameController gameController = new GameController(GAME_NAME, players, board);
-        final ConsoleView consoleView = new ConsoleView(gameController);
-        final Game expectedGame = new Game(consoleView);
-
-        assertEquals(expectedGame, ConsoleMenuView.defaultStart());
+    public void testShowMenuWithResultDefaultStart() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream("1\n".getBytes());
+        System.setIn(in);
+        try {
+            ConsoleMenuView.showMenuWithResult();
+        }
+        catch (final NoSuchElementException e){
+            e.printStackTrace();
+        }
+        assertEquals("++++  XO Magic  ++++\n" +
+                "1 - Play\n" +
+                "2 - Load\n" +
+                "3 - Set up and play\n" +
+                "4 - Exit\n" +
+                "> A new game started\n" +
+                "PLAYER X: X\n" +
+                "PLAYER O: O\n" +
+                "Next turn!\n" +
+                "Input the coordinate ", outContent.toString());
+        outContent.reset();
     }
+
+    @Test
+    public void testShowMenuWithResultCustomStart() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream("3\n".getBytes());
+        System.setIn(in);
+        try {
+            ConsoleMenuView.showMenuWithResult();
+        }
+        catch (final NoSuchElementException e){
+            e.printStackTrace();
+        }
+        assertEquals("++++  XO Magic  ++++\n" +
+                "1 - Play\n" +
+                "2 - Load\n" +
+                "3 - Set up and play\n" +
+                "4 - Exit\n" +
+                "> Enter player one name:\n", outContent.toString());
+        outContent.reset();
+    }
+
+    @Test
+    public void testShowMenuWithResultLoad() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream("2\n3\n".getBytes());
+        System.setIn(in);
+        try {
+            ConsoleMenuView.showMenuWithResult();
+        }
+        catch (final NoSuchElementException e){
+            e.printStackTrace();
+        }
+        assertEquals("++++  XO Magic  ++++\n" +
+                "1 - Play\n" +
+                "2 - Load\n" +
+                "3 - Set up and play\n" +
+                "4 - Exit\n" +
+                "> Loading...\n", outContent.toString());
+        outContent.reset();
+    }
+
+    @Test
+    public void testShowMenuWithResultExit() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream("4\n".getBytes());
+        System.setIn(in);
+        try {
+            ConsoleMenuView.showMenuWithResult();
+        }
+        catch (final NoSuchElementException e){
+            e.printStackTrace();
+        }
+        assertEquals("++++  XO Magic  ++++\n" +
+                "1 - Play\n" +
+                "2 - Load\n" +
+                "3 - Set up and play\n" +
+                "4 - Exit\n" +
+                "> Exit\n", outContent.toString());
+        outContent.reset();
+    }
+
+    @Test
+    public void testCustomInputForIn() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream("S0me pl4y3r n4m3 1\n S0me pl4y3r n4m3 2\n".getBytes());
+        System.setIn(in);
+        try {
+            ConsoleMenuView.customInput();
+        }
+        catch (final NoSuchElementException e){
+            e.printStackTrace();
+        }
+        assertEquals("Enter player one name:\n" +
+                "Enter player two name:\n" +
+                "Enter board size:\n", outContent.toString());
+        outContent.reset();
+    }
+
+    @Test
+    public void testEnterSizeIncorrectInputString() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream("Xonstantin\n Oleg\n".getBytes());
+        System.setIn(in);
+        try {
+            ConsoleMenuView.enterSize();
+        }
+        catch (final NoSuchElementException e){
+            e.printStackTrace();
+        }
+        assertEquals("Enter board size:\n" +
+                "Input is wrong, please enter correct integer greater than 3\n" +
+                "Enter board size:\n", outContent.toString());
+        outContent.reset();
+    }
+
+    @Test
+    public void testEnterSizeIncorrectInputInt() throws Exception {
+        ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
+        System.setIn(in);
+        try {
+            ConsoleMenuView.enterSize();
+        }
+        catch (final NoSuchElementException e){
+            e.printStackTrace();
+        }
+        assertEquals("Enter board size:\n" +
+                "Input is wrong, please enter correct integer greater than 3\n" +
+                "Enter board size:\n", outContent.toString());
+        outContent.reset();
+    }
+
+    @Test
+    public void testEnterSizeInputInt() throws Exception {
+        final int expectedValue = 4;
+        ByteArrayInputStream in = new ByteArrayInputStream("4\n".getBytes());
+        System.setIn(in);
+        assertEquals(expectedValue,ConsoleMenuView.enterSize());
+    }
+
 }
