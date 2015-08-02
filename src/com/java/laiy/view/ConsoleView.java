@@ -3,7 +3,6 @@ package com.java.laiy.view;
 
 import com.java.laiy.controller.GameController;
 import com.java.laiy.model.Player;
-import com.java.laiy.helpers.CoordinateHelper;
 import com.java.laiy.model.Point;
 import com.java.laiy.model.exceptions.InvalidPointException;
 
@@ -12,19 +11,21 @@ import java.util.Scanner;
 
 public class ConsoleView implements IView {
 
-    private static final int LINE_SIZE = 3;
-
-    private static final String CHARACTER_HYPHEN = "_";
+    private static final String CHARACTER_HYPHEN = "-";
 
     private static final String EMPTY_FIGURE = " ";
 
-    private static final String INPUT_ERROR = "Coordinate is incorrect, please try again";
+    private static final String INPUT_ERROR = "Incorrect input, please try again";
 
     protected final GameController game;
 
     public ConsoleView(final GameController game) {
         assert game != null;
         this.game = game;
+    }
+
+    public GameController getGameController(){
+        return game;
     }
 
     public Point startTurn() {
@@ -43,9 +44,10 @@ public class ConsoleView implements IView {
     }
 
     public void showBoard() {
-        for (int i = 0 ; i < game.getBoard().getFiguresArray().length; i++) {
+        int lineSize = game.getBoard().getFiguresArray().length;
+        for (int i = 0 ; i < lineSize; i++) {
             showBoardLine(i);
-            printLine(CHARACTER_HYPHEN, LINE_SIZE);
+            printLine(CHARACTER_HYPHEN, lineSize);
         }
     }
 
@@ -59,6 +61,32 @@ public class ConsoleView implements IView {
 
     public void showPointOccupied(){
         System.out.println("Point already occupied!");
+    }
+
+    public void anotherGame() {
+        System.out.println("Want another game? Press y/n");
+        try {
+            final Scanner scanner = new Scanner(System.in);
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "y":
+                    ConsoleMenuView.showMenuWithResult();
+                    break;
+                case "n":
+                    System.out.println("Exit...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Please enter \"y\" or \"n\"");
+                    anotherGame();
+                    break;
+            }
+        }
+        catch (final InputMismatchException e)
+        {
+            System.out.println("Please enter \"y\" or \"n\"");
+            anotherGame();
+        }
     }
 
     private void printLine(final String lineCharacter, final int lineSize) {
@@ -84,18 +112,18 @@ public class ConsoleView implements IView {
         System.out.println();
     }
 
-    private int getCoordinate() {
+    protected int getCoordinate() {
         while (true) {
             System.out.print("Input the coordinate ");
             try {
                 final Scanner in = new Scanner(System.in);
-                int coordinate = in.nextInt() - 1;
-                if (CoordinateHelper.checkCoordinate(coordinate)) {
-                    return coordinate;
-                }
-                else {
-                    System.out.println(INPUT_ERROR);
-                }
+                    int coordinate = in.nextInt() - 1;
+                    if (game.getBoard().checkCoordinate(coordinate)) {
+                        return coordinate;
+                    }
+                    else {
+                        System.out.println(INPUT_ERROR);
+                    }
             }
             catch (final InputMismatchException e) {
                 System.out.println(INPUT_ERROR);

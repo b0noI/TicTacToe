@@ -3,7 +3,6 @@ package com.java.laiy.controller;
 import com.java.laiy.model.Board;
 import com.java.laiy.model.Figure;
 import com.java.laiy.model.Player;
-import com.java.laiy.helpers.CoordinateHelper;
 import com.java.laiy.model.exceptions.InvalidPointException;
 import com.java.laiy.model.exceptions.PointOccupiedException;
 

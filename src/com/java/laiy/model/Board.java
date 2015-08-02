@@ -1,8 +1,7 @@
 package com.java.laiy.model;
 
-import com.java.laiy.helpers.CoordinateHelper;
+import com.java.laiy.model.exceptions.InvalidBoardSizeException;
 import com.java.laiy.model.exceptions.InvalidPointException;
-import com.java.laiy.model.exceptions.PointOccupiedException;
 
 public class Board {
 
@@ -12,13 +11,14 @@ public class Board {
 
     private final Figure[][] figures;
 
-    public Board() {
+    public Board() throws InvalidBoardSizeException {
         this(DEFAULT_BOARD_SIZE);
     }
 
-    public Board(final int customBoardSize) {
+    public Board(final int customBoardSize) throws InvalidBoardSizeException {
         if (customBoardSize < DEFAULT_BOARD_SIZE) {
             this.figures = new Figure[DEFAULT_BOARD_SIZE][DEFAULT_BOARD_SIZE];
+            throw new InvalidBoardSizeException();
         }
          else {
             this.figures = new Figure[customBoardSize][customBoardSize];
@@ -26,20 +26,20 @@ public class Board {
     }
 
     public void setFigure(final int x, final int y, final Figure figure) throws InvalidPointException {
-        if (!checkCoordinates(x, y)) {
-            throw new InvalidPointException();
+        if (checkCoordinates(x, y)) {
+            figures[x][y] = figure;
         }
         else {
-            figures[x][y] = figure;
+            throw new InvalidPointException();
         }
     }
 
     public Figure getFigure(final int x, final int y) throws InvalidPointException{
-        if (!checkCoordinates(x, y)) {
-            throw new InvalidPointException();
+        if (checkCoordinates(x, y)) {
+            return figures[x][y];
         }
         else {
-            return figures[x][y];
+            throw new InvalidPointException();
         }
     }
 
@@ -55,11 +55,8 @@ public class Board {
         return (checkCoordinate(x) && checkCoordinate(y));
     }
 
-    private boolean checkCoordinate(final int coordinate) {
-        if (coordinate < MIN_COORDINATE || coordinate > figures.length - 1) {
-            return false;
-        }
-        return true;
+    public boolean checkCoordinate(final int coordinate) {
+        return (coordinate >= MIN_COORDINATE && coordinate <= figures.length - 1);
     }
 
 }
