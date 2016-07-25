@@ -1,5 +1,6 @@
 package com.java.laiy.controller;
 
+import com.java.laiy.model.Player;
 import com.java.laiy.model.Point;
 import com.java.laiy.model.exceptions.PointOccupiedException;
 import com.java.laiy.view.IView;
@@ -14,27 +15,27 @@ public class Game {
         this.gameController = iview.getGameController();
     }
 
-    public void theGame(){
+    public void theGame() {
         while (gameController.getNextTurn()) {
             Point point = iview.startTurn();
             try {
-                gameController.move(point.getX(), point.getY(), gameController.getCurrentPlayer(gameController.getPlayers()[0]));
+                Player currentPlayer = gameController.getCurrentPlayer(gameController.getPlayers()[0]);
+                gameController.move(point.getX(), point.getY(), currentPlayer);
             } catch (PointOccupiedException e) {
                 iview.showPointOccupied();
             }
             iview.showBoard();
         }
-        if (gameController.getWinner() != null){
+        if (gameController.getWinner() != null) {
             iview.showWinner();
             iview.anotherGame();
-        }
-        else {
+        } else {
             iview.showDraw();
             iview.anotherGame();
         }
     }
 
-    protected GameController getGameController(){
+    protected GameController getGameController() {
         return gameController;
     }
 }
